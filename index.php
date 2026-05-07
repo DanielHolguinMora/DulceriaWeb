@@ -1,6 +1,5 @@
 <?php
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 require_once 'config/database.php';
 require_once 'models/Producto.php';
 
@@ -280,16 +279,16 @@ $productos_destacados = $stmt->get_result();
 <div class="product-grid">
     <?php while ($prod = $productos_destacados->fetch_assoc()): ?>
         <div class="product-card">
-            <img src="uploads/<?php echo htmlspecialchars($prod['imagen']); ?>" alt="<?php echo htmlspecialchars($prod['nombre']); ?>">
+            <img src="uploads/<?php echo htmlspecialchars($prod['imagen']); ?>"
+                alt="<?php echo htmlspecialchars($prod['nombre']); ?>">
             <h3><?php echo htmlspecialchars($prod['nombre']); ?></h3>
             <p>$<?php echo number_format($prod['precio'], 2); ?></p>
             <a href="catalogo.php?detalle=<?php echo $prod['id_producto']; ?>" class="btn">Ver más</a>
         </div>
     <?php endwhile; ?>
 </div>
-<<<<<<< HEAD
-<?php require_once 'includes/footer.php'; ?>
->>>>>>> 6e2e6426b7a045d9a2a33bc8b3ab8f2b1b3e5b6f
-=======
-<?php require_once 'includes/footer.php'; ?>
->>>>>>> 6e2e6426b7a045d9a2a33bc8b3ab8f2b1b3e5b6f
+<<<<<<< HEAD <?php require_once 'includes/footer.php'; ?>
+    >>>>>>> 6e2e6426b7a045d9a2a33bc8b3ab8f2b1b3e5b6f
+    =======
+    <?php require_once 'includes/footer.php'; ?>
+    >>>>>>> 6e2e6426b7a045d9a2a33bc8b3ab8f2b1b3e5b6f

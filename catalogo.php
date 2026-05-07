@@ -1,6 +1,5 @@
 <?php
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 require_once 'config/database.php';
 require_once 'models/Producto.php';
 require_once 'models/Categoria.php';
@@ -336,10 +335,3 @@ $productos = $stmt->get_result();
         <?php endwhile; ?>
     <?php endif; ?>
 </div>
-
-<<<<<<< HEAD
-<?php require_once 'includes/footer.php'; ?>
->>>>>>> 6e2e6426b7a045d9a2a33bc8b3ab8f2b1b3e5b6f
-=======
-<?php require_once 'includes/footer.php'; ?>
->>>>>>> 6e2e6426b7a045d9a2a33bc8b3ab8f2b1b3e5b6f

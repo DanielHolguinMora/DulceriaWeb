@@ -1,6 +1,5 @@
 <?php
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 require_once 'config/database.php';
 
 require_once 'views/layout/header.php';
@@ -131,24 +130,24 @@ require_once 'views/layout/footer.php';
 require_once 'includes/header.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nombre = trim($_POST['nombre']);
-    $email = trim($_POST['email']);
-    $mensaje = trim($_POST['mensaje']);
+$nombre = trim($_POST['nombre']);
+$email = trim($_POST['email']);
+$mensaje = trim($_POST['mensaje']);
 
-    $errores = [];
-    if (empty($nombre)) $errores[] = "El nombre es obligatorio.";
-    if (empty($email)) $errores[] = "El email es obligatorio.";
-    if (empty($mensaje)) $errores[] = "El mensaje es obligatorio.";
+$errores = [];
+if (empty($nombre)) $errores[] = "El nombre es obligatorio.";
+if (empty($email)) $errores[] = "El email es obligatorio.";
+if (empty($mensaje)) $errores[] = "El mensaje es obligatorio.";
 
-    if (empty($errores)) {
-        $stmt = $conn->prepare("INSERT INTO mensajes_contacto (nombre, email, mensaje) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $nombre, $email, $mensaje);
-        if ($stmt->execute()) {
-            $exito = "Mensaje enviado correctamente. ¡Gracias por contactarnos!";
-        } else {
-            $errores[] = "Error al guardar el mensaje.";
-        }
-    }
+if (empty($errores)) {
+$stmt = $conn->prepare("INSERT INTO mensajes_contacto (nombre, email, mensaje) VALUES (?, ?, ?)");
+$stmt->bind_param("sss", $nombre, $email, $mensaje);
+if ($stmt->execute()) {
+$exito = "Mensaje enviado correctamente. ¡Gracias por contactarnos!";
+} else {
+$errores[] = "Error al guardar el mensaje.";
+}
+}
 }
 ?>
 <h2>Contacto</h2>
@@ -180,9 +179,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <p>También puedes visitarnos en: Av. Dulce 123, Ciudad, o llamarnos al (123) 456-7890.</p>
 
-<<<<<<< HEAD
-<?php require_once 'includes/footer.php'; ?>
->>>>>>> 6e2e6426b7a045d9a2a33bc8b3ab8f2b1b3e5b6f
-=======
-<?php require_once 'includes/footer.php'; ?>
->>>>>>> 6e2e6426b7a045d9a2a33bc8b3ab8f2b1b3e5b6f
+<<<<<<< HEAD <?php require_once 'includes/footer.php'; ?>
+    >>>>>>> 6e2e6426b7a045d9a2a33bc8b3ab8f2b1b3e5b6f
+    =======
+    <?php require_once 'includes/footer.php'; ?>
+    >>>>>>> 6e2e6426b7a045d9a2a33bc8b3ab8f2b1b3e5b6f

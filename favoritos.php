@@ -1,6 +1,4 @@
 <?php
-<<<<<<< HEAD
-<<<<<<< HEAD
 require_once 'config/database.php';
 $database = new Database();
 $db = $database->getConnection();
@@ -75,11 +73,11 @@ $favoritos_ids = $_SESSION['favoritos'] ?? [];
 $productos_fav = [];
 
 if (!empty($favoritos_ids)) {
-    $placeholders = implode(',', array_fill(0, count($favoritos_ids), '?'));
-    $stmt = $conn->prepare("SELECT * FROM producto WHERE id_producto IN ($placeholders)");
-    $stmt->bind_param(str_repeat('i', count($favoritos_ids)), ...$favoritos_ids);
-    $stmt->execute();
-    $productos_fav = $stmt->get_result();
+$placeholders = implode(',', array_fill(0, count($favoritos_ids), '?'));
+$stmt = $conn->prepare("SELECT * FROM producto WHERE id_producto IN ($placeholders)");
+$stmt->bind_param(str_repeat('i', count($favoritos_ids)), ...$favoritos_ids);
+$stmt->execute();
+$productos_fav = $stmt->get_result();
 }
 ?>
 <h2>Mis favoritos</h2>
@@ -90,18 +88,15 @@ if (!empty($favoritos_ids)) {
     <div class="product-grid">
         <?php while ($prod = $productos_fav->fetch_assoc()): ?>
             <div class="product-card">
-                <img src="uploads/<?php echo htmlspecialchars($prod['imagen']); ?>" alt="<?php echo htmlspecialchars($prod['nombre']); ?>">
+                <img src="uploads/<?php echo htmlspecialchars($prod['imagen']); ?>"
+                    alt="<?php echo htmlspecialchars($prod['nombre']); ?>">
                 <h3><?php echo htmlspecialchars($prod['nombre']); ?></h3>
                 <p>$<?php echo number_format($prod['precio'], 2); ?></p>
-                <button class="btn btn-danger remove-fav" data-id="<?php echo $prod['id_producto']; ?>">🗑️ Eliminar de favoritos</button>
+                <button class="btn btn-danger remove-fav" data-id="<?php echo $prod['id_producto']; ?>">🗑️ Eliminar de
+                    favoritos</button>
             </div>
         <?php endwhile; ?>
     </div>
 <?php endif; ?>
 
-<<<<<<< HEAD
 <?php require_once 'includes/footer.php'; ?>
->>>>>>> 6e2e6426b7a045d9a2a33bc8b3ab8f2b1b3e5b6f
-=======
-<?php require_once 'includes/footer.php'; ?>
->>>>>>> 6e2e6426b7a045d9a2a33bc8b3ab8f2b1b3e5b6f
