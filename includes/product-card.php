@@ -31,6 +31,7 @@ function renderProductCard($product) {
                 <span class='product-price'>\${$price}</span>
                 <div class='product-actions'>
                     <button class='fav-btn' title='Añadir a favoritos'><i class='fa-regular fa-heart'></i></button>
+                    <a href='producto.php?id={$product['id']}' class='view-more-btn' title='Ver detalles'><i class='fa-solid fa-eye'></i></a>
                 </div>
             </div>
         </div>

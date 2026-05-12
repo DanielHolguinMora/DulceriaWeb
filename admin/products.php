@@ -4,7 +4,11 @@ require_once '../includes/db.php';
 
 $products = [];
 if ($pdo) {
-    $stmt = $pdo->query("SELECT p.*, c.nombre as categoria_nombre FROM productos p JOIN categoria c ON p.categoria_id = c.id ORDER BY p.id DESC");
+    $stmt = $pdo->query("SELECT p.*, c.nombre as categoria_nombre, m.nombre as marca_nombre 
+                         FROM productos p 
+                         JOIN categoria c ON p.categoria_id = c.id 
+                         LEFT JOIN marca m ON p.marca_id = m.id 
+                         ORDER BY p.id DESC");
     $products = $stmt->fetchAll();
 }
 ?>
@@ -50,6 +54,7 @@ if ($pdo) {
                             <th>Imagen</th>
                             <th>Nombre</th>
                             <th>Categoría</th>
+                            <th>Marca</th>
                             <th>Precio</th>
                             <th>Stock</th>
                             <th>Acciones</th>
@@ -58,7 +63,7 @@ if ($pdo) {
                     <tbody>
                         <?php if (empty($products)): ?>
                             <tr>
-                                <td colspan="6" style="text-align: center; padding: 40px;">No hay productos registrados.
+                                <td colspan="7" style="text-align: center; padding: 40px;">No hay productos registrados.
                                 </td>
                             </tr>
                         <?php else: ?>
@@ -75,15 +80,18 @@ if ($pdo) {
                                     <td><span class="category-label"
                                             style="margin-bottom:0;"><?php echo htmlspecialchars($p['categoria_nombre']); ?></span>
                                     </td>
+                                    <td><?php echo htmlspecialchars($p['marca_nombre'] ?? 'N/A'); ?></td>
                                     <td>$<?php echo number_format($p['precio'], 2); ?></td>
                                     <td><?php echo $p['stock']; ?></td>
-                                    <td class="action-btns">
-                                        <a href="edit_product.php?id=<?php echo $p['id']; ?>" class="btn-edit" title="Editar"><i
-                                                class="fa-solid fa-pen-to-square"></i></a>
-                                        <a href="delete_product.php?id=<?php echo $p['id']; ?>" class="btn-delete"
-                                            title="Eliminar"
-                                            onclick="return confirm('¿Estás seguro de que quieres eliminar este producto?')"><i
-                                                class="fa-solid fa-trash"></i></a>
+                                    <td>
+                                        <div class="action-btns">
+                                            <a href="edit_product.php?id=<?php echo $p['id']; ?>" class="btn-edit"
+                                                title="Editar"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            <a href="delete_product.php?id=<?php echo $p['id']; ?>" class="btn-delete"
+                                                title="Eliminar"
+                                                onclick="return confirm('¿Estás seguro de que quieres eliminar este producto?')"><i
+                                                    class="fa-solid fa-trash"></i></a>
+                                        </div>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

@@ -22,7 +22,7 @@
         <nav class="navbar container">
             <div class="nav-logo">
                 <a href="index.php">
-                    <span class="logo-text">DULCERÍA <span class="accent">EL LOCO</span></span>
+                    <img src="assets/img/LogoSolo.png" alt="Dulcería El Loco Logo" class="logo-img">
                 </a>
             </div>
             

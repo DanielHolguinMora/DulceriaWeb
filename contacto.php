@@ -1,6 +1,6 @@
-<?php 
-require_once 'includes/db.php'; 
-include 'includes/header.php'; 
+<?php
+require_once 'includes/db.php';
+include 'includes/header.php';
 
 $message_sent = false;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'] ?? '';
     $email = $_POST['email'] ?? '';
     $message = $_POST['message'] ?? '';
-    
+
     if (!empty($name) && !empty($email) && !empty($message)) {
         // In a real app, send email or save to DB
         // For now, just simulate success
@@ -31,7 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="contact-form-card">
                     <?php if ($message_sent): ?>
                         <div class="success-message">
-                            <i class="fa-solid fa-circle-check"></i> ¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.
+                            <i class="fa-solid fa-circle-check"></i> ¡Mensaje enviado con éxito! Nos pondremos en contacto
+                            pronto.
                         </div>
                     <?php endif; ?>
 
@@ -46,7 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         <div class="form-group">
                             <label for="message">Mensaje</label>
-                            <textarea id="message" name="message" rows="5" placeholder="¿En qué podemos ayudarte?" required></textarea>
+                            <textarea id="message" name="message" rows="5" placeholder="¿En qué podemos ayudarte?"
+                                required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Mensaje</button>
                     </form>
@@ -79,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <i class="fa-solid fa-clock"></i>
                             <div>
                                 <h4>Horario</h4>
-                                <p>Lun - Sáb: 9:00 AM - 8:00 PM<br>Dom: 10:00 AM - 4:00 PM</p>
+                                <p>Lun - Sáb: 7:00 AM - 5:30 PM<br>Dom: 08:00 AM - 3:00 PM</p>
                             </div>
                         </div>
                     </div>
