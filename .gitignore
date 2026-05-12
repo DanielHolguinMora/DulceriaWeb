@@ -1,0 +1,10 @@
+# XAMPP / PHP
+.DS_Store
+*.log
+*.tmp
+node_modules/
+.vscode/
+.idea/
+
+# Database config (if it had passwords, but it's local root)
+# includes/db.php
