@@ -1,22 +1,25 @@
 <?php 
 require_once 'includes/db.php'; 
-require_once 'includes/products.php';
 require_once 'includes/product-card.php';
 include 'includes/header.php'; 
 
-// Database logic (optional for now, using array as primary source)
+// Fetch Products from Database
+$products = [];
+$categories_db = [];
+
 if ($pdo) {
     try {
-        $stmt = $pdo->query("SELECT * FROM productos");
-        $db_products = $stmt->fetchAll();
-        if (!empty($db_products)) {
-            // Map DB fields to our card structure if needed
-            // $products = $db_products; 
-        }
-    } catch (Exception $e) {}
-}
+        // Fetch categories for filters
+        $stmt_cat = $pdo->query("SELECT * FROM categoria");
+        $categories_db = $stmt_cat->fetchAll();
 
-$categories = ['Todo', 'Chocolates', 'Gummies', 'Chips', 'Mexican Candy', 'Drinks'];
+        // Fetch products with category names
+        $stmt = $pdo->query("SELECT p.*, c.nombre as categoria_nombre FROM productos p JOIN categoria c ON p.categoria_id = c.id");
+        $products = $stmt->fetchAll();
+    } catch (Exception $e) {
+        $error = "Error al conectar con la base de datos.";
+    }
+}
 ?>
 
 <main class="catalog-page">
@@ -39,10 +42,11 @@ $categories = ['Todo', 'Chocolates', 'Gummies', 'Chips', 'Mexican Candy', 'Drink
             </div>
 
             <div class="category-filters">
-                <?php foreach ($categories as $cat): ?>
-                    <button class="filter-btn <?php echo $cat === 'Todo' ? 'active' : ''; ?>" 
-                            data-filter="<?php echo $cat === 'Todo' ? 'all' : strtolower(str_replace(' ', '-', $cat)); ?>">
-                        <?php echo $cat; ?>
+                <button class="filter-btn active" data-filter="all">Todo</button>
+                <?php foreach ($categories_db as $cat): ?>
+                    <button class="filter-btn" 
+                            data-filter="<?php echo strtolower(str_replace(' ', '-', $cat['nombre'])); ?>">
+                        <?php echo $cat['nombre']; ?>
                     </button>
                 <?php endforeach; ?>
             </div>

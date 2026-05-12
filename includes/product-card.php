@@ -1,10 +1,11 @@
 <?php
 function renderProductCard($product) {
     $name = htmlspecialchars($product['nombre']);
-    $desc = htmlspecialchars($product['descripcion']);
+    $desc = htmlspecialchars($product['descripcion'] ?? '');
     $price = number_format($product['precio'], 2);
-    $category = htmlspecialchars($product['categoria']);
-    $image = $product['imagen'];
+    // Use joined category name or fallback
+    $category = htmlspecialchars($product['categoria_nombre'] ?? $product['categoria'] ?? 'Sin categoría');
+    $image = $product['imagen_frontal'] ?? $product['imagen'] ?? 'assets/img/hero.png';
     $isNew = isset($product['nuevo']) && $product['nuevo'];
     
     // Create a slug or simple ID for filtering/JS
@@ -30,7 +31,6 @@ function renderProductCard($product) {
                 <span class='product-price'>\${$price}</span>
                 <div class='product-actions'>
                     <button class='fav-btn' title='Añadir a favoritos'><i class='fa-regular fa-heart'></i></button>
-                    <a href='producto.php?id={$product['id']}' class='view-more-btn'>Ver más</a>
                 </div>
             </div>
         </div>
