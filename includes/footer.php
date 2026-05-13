@@ -30,8 +30,13 @@
         </div>
         
         <div class="footer-bottom container">
-            <p>&copy; <?php echo date('Y'); ?> Dulcería El Loco. Todos los derechos reservados.</p>
-            <p>Diseñado con <i class="fa-solid fa-heart text-accent"></i> en Ciudad Juárez</p>
+            <div class="footer-copy">
+                <p>&copy; <?php echo date('Y'); ?> Dulcería El Loco. Todos los derechos reservados.</p>
+                <p>Diseñado con <i class="fa-solid fa-heart text-accent"></i> en Ciudad Juárez</p>
+            </div>
+            <div class="footer-admin-link">
+                <a href="login.php" class="admin-access-btn"><i class="fa-solid fa-user-lock"></i> Acceso Admin</a>
+            </div>
         </div>
     </footer>
 

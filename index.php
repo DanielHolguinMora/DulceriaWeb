@@ -29,7 +29,7 @@ if ($pdo) {
                 </div>
             </div>
             <div class="hero-image">
-                <img src="assets/img/hero.png" alt="Dulcería El Loco Hero">
+                <img src="assets/img/hero3.jpg" alt="Dulcería El Loco Hero">
                 <div class="floating-candy" style="top: 10%; right: -20px; animation-delay: 0s;">
                     <i class="fa-solid fa-candy-cane text-accent"
                         style="font-size: 3rem; transform: rotate(45deg);"></i>
@@ -51,11 +51,11 @@ if ($pdo) {
             </div>
 
             <div class="product-grid">
-                <?php 
+                <?php
                 require_once 'includes/product-card.php';
                 foreach ($featured_products as $product) {
                     renderProductCard($product);
-                } 
+                }
                 ?>
             </div>
 

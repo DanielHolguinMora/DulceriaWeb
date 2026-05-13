@@ -80,6 +80,31 @@ if ($pdo) {
                 </div>
             </section>
         </main>
+
+        <!-- Admin Mobile Bottom Nav -->
+        <nav class="admin-mobile-nav">
+            <a href="dashboard.php" class="nav-item active">
+                <i class="fa-solid fa-gauge"></i>
+                <span>Panel</span>
+            </a>
+            <a href="products.php" class="nav-item">
+                <i class="fa-solid fa-candy-cane"></i>
+                <span>Productos</span>
+            </a>
+            <div class="nav-item-center">
+                <a href="add_product.php" class="center-add">
+                    <i class="fa-solid fa-plus"></i>
+                </a>
+            </div>
+            <a href="../index.php" class="nav-item" target="_blank">
+                <i class="fa-solid fa-eye"></i>
+                <span>Ver Sitio</span>
+            </a>
+            <a href="../logout.php" class="nav-item">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Salir</span>
+            </a>
+        </nav>
     </div>
 </body>
 

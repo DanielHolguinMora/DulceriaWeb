@@ -25,17 +25,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $image_path = '';
     if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === 0) {
         $upload_dir = '../uploads/';
-        $file_ext = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
-        $file_name = uniqid() . '.' . $file_ext;
-        $target_file = $upload_dir . $file_name;
+        $allowed_exts = ['jpg', 'jpeg', 'png', 'webp'];
+        $file_ext = strtolower(pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION));
+        
+        if (in_array($file_ext, $allowed_exts)) {
+            $file_name = uniqid() . '.' . $file_ext;
+            $target_file = $upload_dir . $file_name;
 
-        if (move_uploaded_file($_FILES['imagen']['tmp_name'], $target_file)) {
-            $image_path = 'uploads/' . $file_name;
+            if (move_uploaded_file($_FILES['imagen']['tmp_name'], $target_file)) {
+                $image_path = 'uploads/' . $file_name;
+            } else {
+                $error = 'Error al subir la imagen al servidor.';
+            }
         } else {
-            $error = 'Error al subir la imagen.';
+            $error = 'Formato de imagen no permitido. Usa JPG, PNG o WEBP.';
         }
     } else {
-        $error = 'Por favor, selecciona una imagen.';
+        $error = 'Por favor, selecciona una imagen válida.';
     }
 
     if (empty($error) && !empty($nombre) && !empty($precio) && !empty($categoria_id)) {
@@ -130,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         <div class="form-group">
                             <label for="imagen">Imagen Frontal</label>
-                            <input type="file" id="imagen" name="imagen" accept="image/*" required>
+                            <input type="file" id="imagen" name="imagen" accept="image/png, image/jpeg, image/webp" required>
                         </div>
                     </div>
 

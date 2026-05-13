@@ -1,7 +1,7 @@
-<?php 
-require_once 'includes/db.php'; 
+<?php
+require_once 'includes/db.php';
 require_once 'includes/product-card.php';
-include 'includes/header.php'; 
+include 'includes/header.php';
 
 // Fetch Products from Database
 $products = [];
@@ -31,47 +31,59 @@ if ($pdo) {
         </div>
     </section>
 
-    <!-- Search and Filters -->
-    <section class="catalog-controls">
+    <section class="catalog-section">
         <div class="container">
-            <div class="search-bar-wrapper">
-                <div class="search-input-group">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="product-search" placeholder="Buscar dulces por nombre...">
+            <!-- Catalog Toolbar (Filters & Search) -->
+            <div class="catalog-toolbar">
+                <!-- Search on the Left -->
+                <div class="catalog-search-top">
+                    <div class="search-input-group">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="product-search" placeholder="Buscar dulce...">
+                    </div>
                 </div>
-            </div>
 
-            <div class="category-filters">
-                <button class="filter-btn active" data-filter="all">Todo</button>
-                <?php foreach ($categories_db as $cat): ?>
-                    <button class="filter-btn" 
-                            data-filter="<?php echo strtolower(str_replace(' ', '-', $cat['nombre'])); ?>">
-                        <?php echo $cat['nombre']; ?>
+                <!-- Carousel on the Right with Arrows -->
+                <div class="category-carousel-wrapper">
+                    <button class="carousel-arrow left" id="carousel-prev">
+                        <i class="fa-solid fa-chevron-left"></i>
                     </button>
-                <?php endforeach; ?>
-            </div>
-        </div>
-    </section>
+                    
+                    <div class="category-carousel" id="category-carousel">
+                        <button class="filter-btn active" data-filter="all">Todo</button>
+                        <?php foreach ($categories_db as $cat): ?>
+                            <button class="filter-btn" 
+                                    data-filter="<?php echo strtolower(str_replace(' ', '-', $cat['nombre'])); ?>">
+                                <?php echo $cat['nombre']; ?>
+                            </button>
+                        <?php endforeach; ?>
+                    </div>
 
-    <!-- Product Grid -->
-    <section class="catalog-grid-section section-padding">
-        <div class="container">
-            <div class="product-grid" id="catalog-grid">
-                <?php 
-                foreach ($products as $product) {
-                    renderProductCard($product);
-                }
-                ?>
-            </div>
-
-            <!-- Empty State -->
-            <div id="empty-state" class="empty-state" style="display: none;">
-                <div class="empty-icon">
-                    <i class="fa-solid fa-cookie-bite"></i>
+                    <button class="carousel-arrow right" id="carousel-next">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
                 </div>
-                <h3>No se encontraron dulces</h3>
-                <p>Intenta con otros términos de búsqueda o selecciona una categoría diferente.</p>
-                <button onclick="resetFilters()" class="btn btn-secondary">Ver todo el catálogo</button>
+            </div>
+
+            <!-- Contenido Principal (Grid de 5 Columnas) -->
+            <div class="catalog-full-content">
+                <div class="product-grid-5" id="catalog-grid">
+                        <?php
+                        foreach ($products as $product) {
+                            renderProductCard($product);
+                        }
+                        ?>
+                </div>
+
+                <!-- Empty State -->
+                <div id="empty-state" class="empty-state" style="display: none;">
+                    <div class="empty-icon">
+                        <i class="fa-solid fa-cookie-bite"></i>
+                    </div>
+                    <h3>No se encontraron dulces</h3>
+                    <p>Intenta con otros términos de búsqueda o selecciona una categoría diferente.</p>
+                    <button onclick="resetFilters()" class="btn btn-secondary">Ver todo el catálogo</button>
+                </div>
             </div>
         </div>
     </section>

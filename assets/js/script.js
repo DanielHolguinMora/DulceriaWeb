@@ -214,4 +214,33 @@ document.addEventListener('DOMContentLoaded', () => {
         
         filterProducts();
     };
+
+    // Category Carousel Scroll
+    const carousel = document.getElementById('category-carousel');
+    const prevBtn = document.getElementById('carousel-prev');
+    const nextBtn = document.getElementById('carousel-next');
+
+    if (carousel && prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', () => {
+            carousel.scrollBy({ left: -200, behavior: 'smooth' });
+        });
+
+        nextBtn.addEventListener('click', () => {
+            carousel.scrollBy({ left: 200, behavior: 'smooth' });
+        });
+
+        // Hide/Show arrows based on scroll position (optional but nice)
+        carousel.addEventListener('scroll', () => {
+            prevBtn.style.opacity = carousel.scrollLeft <= 0 ? '0.3' : '1';
+            prevBtn.style.pointerEvents = carousel.scrollLeft <= 0 ? 'none' : 'auto';
+            
+            const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+            nextBtn.style.opacity = carousel.scrollLeft >= maxScroll - 5 ? '0.3' : '1';
+            nextBtn.style.pointerEvents = carousel.scrollLeft >= maxScroll - 5 ? 'none' : 'auto';
+        });
+
+        // Initialize arrows state
+        prevBtn.style.opacity = '0.3';
+        prevBtn.style.pointerEvents = 'none';
+    }
 });

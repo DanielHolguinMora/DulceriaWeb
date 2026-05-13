@@ -57,24 +57,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="contact-info-section">
                     <div class="contact-info-list">
                         <div class="info-item">
-                            <i class="fa-solid fa-location-dot"></i>
+                            <a href="#mapa" class="info-icon-link"><i class="fa-solid fa-location-dot"></i></a>
                             <div>
                                 <h4>Visítanos</h4>
-                                <p>Av. Benito Juárez 123, Centro Histórico<br>Ciudad Juárez, Chihuahua.</p>
+                                <p><a href="#mapa" class="info-text-link">Ignacio Mariscal s/n, Barrio Alto,
+                                        32160<br>Ciudad Juárez, Chihuahua.</a></p>
                             </div>
                         </div>
                         <div class="info-item">
-                            <i class="fa-solid fa-phone"></i>
+                            <a href="tel:+526566123560" class="info-icon-link"><i class="fa-solid fa-phone"></i></a>
                             <div>
                                 <h4>Llámanos</h4>
-                                <p>+52 (656) 123-4567</p>
+                                <p><a href="tel:+526566123560" class="info-text-link">+52 656 612 3560</a></p>
                             </div>
                         </div>
                         <div class="info-item">
-                            <i class="fa-solid fa-envelope"></i>
+                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=dulcerias.elloco@gmail.com"
+                                target="_blank" class="info-icon-link"><i class="fa-solid fa-envelope"></i></a>
                             <div>
                                 <h4>Escríbenos</h4>
-                                <p>hola@dulceriaelloco.com</p>
+                                <p><a href="https://mail.google.com/mail/?view=cm&fs=1&to=dulcerias.elloco@gmail.com"
+                                        target="_blank" class="info-text-link">dulcerias.elloco@gmail.com</a></p>
                             </div>
                         </div>
                         <div class="info-item">
@@ -97,7 +100,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
         </div>
-    </section>
+        <section class="contact-map-section" id="mapa">
+            <div class="container">
+                <div class="map-container-wrapper">
+                    <div class="map-header">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                        <h3>Nuestra Ubicación</h3>
+                        <p>Encuéntranos en el corazón de Ciudad Juárez</p>
+                    </div>
+                    <div class="map-frame">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3393.210803072876!2d-106.49065928828318!3d31.737446536276135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86e75f2c5761719f%3A0x4a25bec6b902430a!2sDulcer%C3%ADa%20El%20Remolino!5e0!3m2!1ses-419!2smx!4v1778641478592!5m2!1ses-419!2smx"
+                            width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
 </main>
 
 <?php include 'includes/footer.php'; ?>
