@@ -4,8 +4,8 @@
                 <h3 class="footer-logo">DULCERÍA <span class="accent">EL LOCO</span></h3>
                 <p>Tu rincón dulce en el corazón de Ciudad Juárez. Ofrecemos la mejor selección de dulces nacionales, importados y botanas para todos los gustos.</p>
                 <div class="social-links">
-                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61589713318775" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/dulceriaelloco/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
                     <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
                 </div>
             </div>

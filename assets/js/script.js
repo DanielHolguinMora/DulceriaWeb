@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     const header = document.getElementById('header');
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     
     // Sticky Header on Scroll
     window.addEventListener('scroll', () => {
@@ -11,12 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Mobile Menu Toggle (Basic)
-    if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', () => {
-            alert('Menú móvil próximamente. Implementando navegación completa...');
-        });
-    }
 
     // --- Toast System ---
     const showToast = (message, icon = 'fa-check-circle') => {

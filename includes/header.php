@@ -49,9 +49,6 @@
                 <a href="login.php" class="btn btn-secondary btn-sm">
                     <i class="fa-solid fa-user"></i> Admin
                 </a>
-                <button class="mobile-menu-btn" id="mobile-menu-btn">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
             </div>
         </nav>
     </header>
