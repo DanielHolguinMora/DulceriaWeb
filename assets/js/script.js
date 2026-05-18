@@ -181,6 +181,13 @@ document.addEventListener('DOMContentLoaded', () => {
             searchQuery = e.target.value;
             filterProducts();
         });
+
+        // Hide mobile keyboard when pressing "Enter"
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                searchInput.blur();
+            }
+        });
     }
 
     filterButtons.forEach(btn => {
@@ -190,6 +197,15 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.classList.add('active');
 
             activeCategory = btn.getAttribute('data-filter');
+
+            // Clear search bar when selecting 'Todo' (all)
+            if (activeCategory === 'all') {
+                if (searchInput) {
+                    searchInput.value = '';
+                }
+                searchQuery = '';
+            }
+
             filterProducts();
         });
     });

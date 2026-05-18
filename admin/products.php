@@ -218,6 +218,14 @@ if ($pdo) {
             }
 
             searchInput.addEventListener('input', filterProducts);
+            
+            // Hide mobile keyboard when pressing "Enter"
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    searchInput.blur();
+                }
+            });
+
             categoryFilter.addEventListener('change', filterProducts);
         });
     </script>
