@@ -28,10 +28,8 @@ $brands = $pdo->query("SELECT * FROM marca")->fetchAll();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = $_POST['nombre'] ?? '';
     $descripcion = $_POST['descripcion'] ?? '';
-    $precio = $_POST['precio'] ?? '';
     $categoria_id = $_POST['categoria_id'] ?? '';
     $marca_id = $_POST['marca_id'] ?? null;
-    $stock = $_POST['stock'] ?? 0;
 
     $image_path = $product['imagen_frontal'];
 
@@ -51,18 +49,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    if (!empty($nombre) && !empty($precio) && !empty($categoria_id)) {
+    if (!empty($nombre) && !empty($categoria_id)) {
         try {
-            $stmt = $pdo->prepare("UPDATE productos SET nombre = ?, descripcion = ?, precio = ?, categoria_id = ?, marca_id = ?, stock = ?, imagen_frontal = ? WHERE id = ?");
-            $stmt->execute([$nombre, $descripcion, $precio, $categoria_id, $marca_id, $stock, $image_path, $id]);
+            $stmt = $pdo->prepare("UPDATE productos SET nombre = ?, descripcion = ?, categoria_id = ?, marca_id = ?, imagen_frontal = ? WHERE id = ?");
+            $stmt->execute([$nombre, $descripcion, $categoria_id, $marca_id, $image_path, $id]);
             $success = 'Producto actualizado con éxito.';
             // Update local object to show new data in form
             $product['nombre'] = $nombre;
             $product['descripcion'] = $descripcion;
-            $product['precio'] = $precio;
             $product['categoria_id'] = $categoria_id;
             $product['marca_id'] = $marca_id;
-            $product['stock'] = $stock;
             $product['imagen_frontal'] = $image_path;
         } catch (Exception $e) {
             $error = 'Error al actualizar: ' . $e->getMessage();
@@ -144,17 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="precio">Precio ($)</label>
-                            <input type="number" step="0.01" id="precio" name="precio"
-                                value="<?php echo $product['precio']; ?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="stock">Stock</label>
-                            <input type="number" id="stock" name="stock" value="<?php echo $product['stock']; ?>">
-                        </div>
-                    </div>
+
 
                     <div class="form-group">
                         <label for="imagen">Cambiar Imagen (opcional)</label>

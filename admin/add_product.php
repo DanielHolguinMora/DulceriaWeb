@@ -16,10 +16,8 @@ if ($pdo) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = $_POST['nombre'] ?? '';
     $descripcion = $_POST['descripcion'] ?? '';
-    $precio = $_POST['precio'] ?? '';
     $categoria_id = $_POST['categoria_id'] ?? '';
     $marca_id = $_POST['marca_id'] ?? null;
-    $stock = $_POST['stock'] ?? 0;
 
     // Handle Image Upload
     $image_path = '';
@@ -44,10 +42,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Por favor, selecciona una imagen válida.';
     }
 
-    if (empty($error) && !empty($nombre) && !empty($precio) && !empty($categoria_id)) {
+    if (empty($error) && !empty($nombre) && !empty($categoria_id)) {
         try {
-            $stmt = $pdo->prepare("INSERT INTO productos (nombre, descripcion, precio, categoria_id, marca_id, stock, imagen_frontal) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$nombre, $descripcion, $precio, $categoria_id, $marca_id, $stock, $image_path]);
+            $stmt = $pdo->prepare("INSERT INTO productos (nombre, descripcion, categoria_id, marca_id, imagen_frontal) VALUES (?, ?, ?, ?, ?)");
+            $stmt->execute([$nombre, $descripcion, $categoria_id, $marca_id, $image_path]);
             $success = 'Producto añadido con éxito.';
         } catch (Exception $e) {
             $error = 'Error al guardar en la base de datos: ' . $e->getMessage();
@@ -126,14 +124,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group">
-                            <label for="precio">Precio ($)</label>
-                            <input type="number" step="0.01" id="precio" name="precio" placeholder="0.00" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="stock">Stock Inicial</label>
-                            <input type="number" id="stock" name="stock" value="0">
-                        </div>
                         <div class="form-group">
                             <label for="imagen">Imagen Frontal</label>
                             <input type="file" id="imagen" name="imagen" accept="image/png, image/jpeg, image/webp" required>

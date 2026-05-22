@@ -31,18 +31,16 @@ if (!$product) {
 
 $name = htmlspecialchars($product['nombre']);
 $desc = nl2br(htmlspecialchars($product['descripcion']));
-$price = number_format($product['precio'], 2);
 $category = htmlspecialchars($product['categoria_nombre']);
 $brand = htmlspecialchars($product['marca_nombre'] ?? 'Genérica');
-$stock = $product['stock'];
 $image = $product['imagen_frontal'];
 ?>
 
 <main class="product-detail-page">
     <div class="container">
         <nav class="breadcrumb">
-            <a href="index.php">Inicio</a> / 
-            <a href="catalogo.php">Catálogo</a> / 
+            <a href="index.php">Inicio</a> /
+            <a href="catalogo.php">Catálogo</a> /
             <span><?php echo $name; ?></span>
         </nav>
 
@@ -57,34 +55,22 @@ $image = $product['imagen_frontal'];
                 <span class="category-tag"><?php echo $category; ?></span>
                 <h1 class="product-title"><?php echo $name; ?></h1>
                 <div class="product-brand-info">Marca: <strong><?php echo $brand; ?></strong></div>
-                
-                <div class="product-price-large">$<?php echo $price; ?></div>
-                
+
                 <div class="product-description-box">
                     <h3>Descripción</h3>
                     <p><?php echo $desc; ?></p>
                 </div>
 
-                <div class="product-meta">
-                    <div class="stock-status <?php echo ($stock > 0) ? 'in-stock' : 'out-of-stock'; ?>">
-                        <i class="fa-solid <?php echo ($stock > 0) ? 'fa-check-circle' : 'fa-times-circle'; ?>"></i>
-                        <?php echo ($stock > 0) ? "Disponible ($stock unidades)" : "Agotado"; ?>
-                    </div>
-                </div>
+                <div class="product-actions-detailed" data-id="<?php echo $product['id']; ?>"
+                    data-name="<?php echo $name; ?>"
+                    data-image="<?php echo $image; ?>" data-category="<?php echo $category; ?>"
+                    data-description="<?php echo htmlspecialchars($product['descripcion']); ?>">
 
-                <div class="product-actions-detailed" 
-                     data-id="<?php echo $product['id']; ?>"
-                     data-name="<?php echo $name; ?>"
-                     data-price="<?php echo $price; ?>"
-                     data-image="<?php echo $image; ?>"
-                     data-category="<?php echo $category; ?>"
-                     data-description="<?php echo htmlspecialchars($product['descripcion']); ?>">
-                    
                     <button class="btn btn-primary btn-large">
                         <i class="fa-solid fa-cart-shopping"></i> Próximamente
                     </button>
                     <button class="fav-btn-detailed" title="Añadir a favoritos">
-                        <i class="fa-regular fa-heart"></i> Favorito
+                        <i class="fa-regular fa-heart"></i> Favoritos
                     </button>
                 </div>
             </div>

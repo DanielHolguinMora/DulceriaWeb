@@ -76,15 +76,13 @@ if ($pdo) {
                                 <th>Nombre</th>
                                 <th>Categoría</th>
                                 <th>Marca</th>
-                                <th>Precio</th>
-                                <th>Stock</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php if (empty($products)): ?>
                                 <tr>
-                                    <td colspan="7" style="text-align: center; padding: 40px;">No hay productos registrados.</td>
+                                    <td colspan="5" style="text-align: center; padding: 40px;">No hay productos registrados.</td>
                                 </tr>
                             <?php else: ?>
                                 <?php foreach ($products as $p): ?>
@@ -104,8 +102,6 @@ if ($pdo) {
                                                 style="margin-bottom:0;"><?php echo htmlspecialchars($p['categoria_nombre']); ?></span>
                                         </td>
                                         <td><?php echo htmlspecialchars($p['marca_nombre'] ?? 'N/A'); ?></td>
-                                        <td>$<?php echo number_format($p['precio'], 2); ?></td>
-                                        <td><?php echo $p['stock']; ?></td>
                                         <td>
                                             <div class="action-btns">
                                                 <a href="edit_product.php?id=<?php echo $p['id']; ?>" class="btn-edit"
@@ -145,9 +141,7 @@ if ($pdo) {
                                     <h4><?php echo htmlspecialchars($p['nombre']); ?></h4>
                                     <div class="card-mobile-meta">
                                         <span>Marca: <strong><?php echo htmlspecialchars($p['marca_nombre'] ?? 'N/A'); ?></strong></span>
-                                        <span>Stock: <strong><?php echo $p['stock']; ?></strong></span>
                                     </div>
-                                    <div class="card-mobile-price">$<?php echo number_format($p['precio'], 2); ?></div>
                                     <div class="card-mobile-actions">
                                         <a href="edit_product.php?id=<?php echo $p['id']; ?>" class="btn-edit-mobile">
                                             <i class="fa-solid fa-pen"></i> Editar
