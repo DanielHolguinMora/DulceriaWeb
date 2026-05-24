@@ -1,0 +1,15 @@
+ErrorDocument 404 /404.php
+
+RewriteEngine On
+
+# Para evitar el problema de "multiple submissions" de formularios
+# Esto asegura que si recargas una página después de un POST, no envíes el formulario de nuevo
+if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
+    header('Location: ' . strtok($_SERVER['REQUEST_URI'], '?'));
+    exit;
+}
+
+# Descomenta las siguientes líneas si tienes un certificado SSL y quieres forzar HTTPS
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]

@@ -12,7 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// Support both standard POST data and JSON payloads
 $data = json_decode(file_get_contents('php://input'), true);
 $product_id = isset($data['id']) ? intval($data['id']) : (isset($_POST['id']) ? intval($_POST['id']) : null);
 $action = isset($data['action']) ? $data['action'] : (isset($_POST['action']) ? $_POST['action'] : '');
@@ -28,7 +27,6 @@ if ($action !== 'like' && $action !== 'unlike') {
 }
 
 try {
-    // Check if product exists and get current likes
     $stmt = $pdo->prepare("SELECT likes FROM productos WHERE id = ?");
     $stmt->execute([$product_id]);
     $product = $stmt->fetch();
@@ -46,7 +44,6 @@ try {
         $new_likes = max(0, $current_likes - 1);
     }
 
-    // Update product likes
     $updateStmt = $pdo->prepare("UPDATE productos SET likes = ? WHERE id = ?");
     $updateStmt->execute([$new_likes, $product_id]);
 

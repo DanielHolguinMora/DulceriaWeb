@@ -1,6 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
     const header = document.getElementById('header');
-    
+
+    // --- Skeleton Loader (Favoritos de la Comunidad) ---
+    window.addEventListener('load', () => {
+        const skeletonGrid = document.getElementById('skeleton-grid');
+        const featuredGrid = document.getElementById('featured-grid');
+        if (skeletonGrid && featuredGrid) {
+            setTimeout(() => {
+                skeletonGrid.style.display = 'none';
+                featuredGrid.style.display = 'grid';
+            }, 800);
+        }
+    });
+
     // Sticky Header on Scroll
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
@@ -50,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const favs = getFavorites().filter(f => f.id !== id);
         localStorage.setItem('dulceria_favorites', JSON.stringify(favs));
         showToast('Eliminado de favoritos', 'fa-trash-can');
-        
+
         // If we are on favorites page, re-render
         if (window.location.pathname.includes('favoritos.php')) {
             renderFavorites();
@@ -64,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const id = card.getAttribute('data-id');
             const btn = card.querySelector('.fav-btn');
             if (!id || !btn) return;
-            
+
             const icon = btn.querySelector('i');
             if (icon && favs.find(f => f.id === id)) {
                 btn.classList.add('active');
@@ -91,9 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', (e) => {
         const cardBtn = e.target.closest('.fav-btn');
         const detailedBtn = e.target.closest('.fav-btn-detailed');
-        
+
         if (!cardBtn && !detailedBtn) return;
-        
+
         e.preventDefault();
         e.stopPropagation();
 
@@ -110,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 cardBtn.classList.add('active');
                 if (icon) icon.classList.replace('fa-regular', 'fa-solid');
-                
+
                 const product = {
                     id: id,
                     nombre: card.querySelector('h3').innerText,
@@ -135,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 detailedBtn.classList.add('active');
                 detailedBtn.innerHTML = `<i class="fa-solid fa-heart"></i> Quitar de Favoritos`;
-                
+
                 const product = {
                     id: id,
                     nombre: container.getAttribute('data-name'),
@@ -159,21 +171,21 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             body: JSON.stringify({ id: id, action: action })
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                // Update all cards with this product ID
-                document.querySelectorAll(`.product-card[data-id="${id}"]`).forEach(card => {
-                    const counter = card.querySelector('.likes-count');
-                    if (counter) {
-                        counter.innerText = data.likes;
-                    }
-                });
-            } else {
-                console.error('Error toggling like in database:', data.message);
-            }
-        })
-        .catch(err => console.error('Error syncing like:', err));
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Update all cards with this product ID
+                    document.querySelectorAll(`.product-card[data-id="${id}"]`).forEach(card => {
+                        const counter = card.querySelector('.likes-count');
+                        if (counter) {
+                            counter.innerText = data.likes;
+                        }
+                    });
+                } else {
+                    console.error('Error toggling like in database:', data.message);
+                }
+            })
+            .catch(err => console.error('Error syncing like:', err));
     };
 
     // --- Favorites Page Rendering ---
@@ -211,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Catalog Filtering & Search Logic ---
     const searchInput = document.getElementById('product-search');
-    const filterButtons = document.querySelectorAll('.filter-btn');
+    const filterButtons = document.querySelectorAll('.sidebar-filter-btn');
     const productCards = document.querySelectorAll('.product-card');
     const emptyState = document.getElementById('empty-state');
     const catalogGrid = document.getElementById('catalog-grid');
@@ -244,6 +256,36 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             emptyState.style.display = 'none';
             catalogGrid.style.display = 'grid';
+        }
+
+        // --- Actualizar contador de productos ---
+        const countNumber = document.getElementById('product-count-number');
+        const countLabel  = document.getElementById('product-count-label');
+
+        if (countNumber && countLabel) {
+            // Animación "pop" al cambiar el número
+            countNumber.classList.remove('pop');
+            void countNumber.offsetWidth; // reflow para reiniciar animación
+            countNumber.classList.add('pop');
+            countNumber.textContent = visibleCount;
+
+            const plural = visibleCount !== 1 ? 's' : '';
+
+            if (searchQuery && activeCategory !== 'all') {
+                // Búsqueda + categoría
+                const catName = document.querySelector(`.sidebar-filter-btn.active span`)?.textContent?.trim() || activeCategory;
+                countLabel.innerHTML = `producto${plural} en <strong>${catName}</strong> que coinciden con "<em>${searchQuery}</em>"`;
+            } else if (searchQuery) {
+                // Solo búsqueda
+                countLabel.innerHTML = `producto${plural} que coinciden con "<em>${searchQuery}</em>"`;
+            } else if (activeCategory !== 'all') {
+                // Solo categoría
+                const catName = document.querySelector(`.sidebar-filter-btn.active span`)?.textContent?.trim() || activeCategory;
+                countLabel.innerHTML = `producto${plural} en <strong>${catName}</strong>`;
+            } else {
+                // Todo el catálogo
+                countLabel.innerHTML = `producto${plural} en <strong>Todo el catálogo</strong>`;
+            }
         }
     };
 
@@ -286,43 +328,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (searchInput) searchInput.value = '';
         searchQuery = '';
         activeCategory = 'all';
-        
+
         filterButtons.forEach(b => {
             b.classList.remove('active');
             if (b.getAttribute('data-filter') === 'all') b.classList.add('active');
         });
-        
+
         filterProducts();
     };
 
-    // Category Carousel Scroll
-    const carousel = document.getElementById('category-carousel');
-    const prevBtn = document.getElementById('carousel-prev');
-    const nextBtn = document.getElementById('carousel-next');
-
-    if (carousel && prevBtn && nextBtn) {
-        prevBtn.addEventListener('click', () => {
-            carousel.scrollBy({ left: -200, behavior: 'smooth' });
-        });
-
-        nextBtn.addEventListener('click', () => {
-            carousel.scrollBy({ left: 200, behavior: 'smooth' });
-        });
-
-        // Hide/Show arrows based on scroll position (optional but nice)
-        carousel.addEventListener('scroll', () => {
-            prevBtn.style.opacity = carousel.scrollLeft <= 0 ? '0.3' : '1';
-            prevBtn.style.pointerEvents = carousel.scrollLeft <= 0 ? 'none' : 'auto';
-            
-            const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-            nextBtn.style.opacity = carousel.scrollLeft >= maxScroll - 5 ? '0.3' : '1';
-            nextBtn.style.pointerEvents = carousel.scrollLeft >= maxScroll - 5 ? 'none' : 'auto';
-        });
-
-        // Initialize arrows state
-        prevBtn.style.opacity = '0.3';
-        prevBtn.style.pointerEvents = 'none';
-    }
+    // (Carousel scroll removed — categories are now in a sidebar)
 
     // --- Product Image Zoom & Lightbox ---
     const mainImageContainer = document.querySelector('.main-image');
@@ -361,7 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
 
             document.body.appendChild(lightbox);
-            
+
             // Force reflow and fade in
             setTimeout(() => {
                 lightbox.classList.add('active');
@@ -406,4 +421,35 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = `producto.php?id=${id}`;
         }
     });
+
+    // --- Floating WhatsApp Logic ---
+    const floatingWhatsApp = document.getElementById('floating-whatsapp');
+    const mainFooter = document.querySelector('.main-footer');
+
+    if (floatingWhatsApp) {
+        window.addEventListener('scroll', () => {
+            let shouldShow = window.scrollY > 100;
+
+            // Hide when reaching the footer
+            if (mainFooter) {
+                const footerRect = mainFooter.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+
+                // If footer top is visible in the viewport
+                if (footerRect.top <= windowHeight) {
+                    shouldShow = false;
+                }
+            }
+
+            if (shouldShow) {
+                floatingWhatsApp.classList.add('show');
+            } else {
+                floatingWhatsApp.classList.remove('show');
+            }
+
+            // Remove any dynamic bottom styles to allow CSS to manage position
+            floatingWhatsApp.style.bottom = '';
+        });
+    }
 });
+

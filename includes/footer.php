@@ -2,6 +2,7 @@
     <div class="container footer-grid">
         <div class="footer-info">
             <h3 class="footer-logo">DULCERÍA <span class="accent">EL LOCO!</span></h3>
+            <!-- <img src="assets/img/9.png" alt="Dulcería El Loco Logo" class="footer-logo-img"> -->
             <p>Tu rincón dulce en el corazón de Ciudad Juárez. Ofrecemos la mejor selección de dulces nacionales,
                 importados y botanas para todos los gustos.</p>
             <div class="social-links">
@@ -9,7 +10,7 @@
                         class="fa-brands fa-facebook-f"></i></a>
                 <a href="https://www.instagram.com/dulceriaelloco/" target="_blank"><i
                         class="fa-brands fa-instagram"></i></a>
-                <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://wa.me/526561968945?text=<?php echo urlencode('Hola! Me gustaría obtener más información sobre sus productos.'); ?>" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
             </div>
         </div>
 
@@ -26,7 +27,7 @@
 
         <div class="footer-contact">
             <h4>Contacto</h4>
-            <p><i class="fa-solid fa-location-dot"></i> Ignacio Mariscal s/n, Barrio Alto, 32160<br>Ciudad Juárez, Chih.
+            <p><i class="fa-solid fa-location-dot"></i> Ignacio Mariscal #338<br>Barrio Alto, 32160<br>Ciudad Juárez, Chih.
             </p>
             <p><i class="fa-solid fa-phone"></i> +52 (656) 612-3560</p>
             <p><i class="fa-solid fa-envelope"></i> dulcerias.elloco@gmail.com</p>
@@ -35,14 +36,20 @@
 
     <div class="footer-bottom container">
         <div class="footer-copy">
-            <p>&copy; <?php echo date('Y'); ?> Dulcería El Loco! Todos los derechos reservados.</p>
-            <p>Diseñado con <i class="fa-solid fa-heart text-accent"></i> en Ciudad Juárez</p>
+            <p>&copy; <?php echo date('Y'); ?> Dulcería El Loco! Todos los derechos reservados.</p>            
+            <p>Diseñado y programado por <i class="fa-solid fa-heart text-accent"></i> <a href="https://portafoliol.netlify.app" target="_blank">Lic. Daniel Holguin</a></p>
         </div>
         <div class="footer-admin-link">
             <a href="login.php" class="admin-access-btn"><i class="fa-solid fa-user-lock"></i> Acceso Admin</a>
         </div>
     </div>
 </footer>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/526561968945?text=<?php echo urlencode('Hola! Me gustaría obtener más información sobre sus productos.'); ?>" 
+   class="floating-whatsapp" id="floating-whatsapp" target="_blank" aria-label="Contáctanos por WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+</a>
 
 <!-- Scripts -->
 <script src="assets/js/script.js?v=<?php echo time(); ?>"></script>

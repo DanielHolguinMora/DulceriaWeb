@@ -2,7 +2,6 @@
 session_start();
 require_once 'includes/db.php';
 
-// If already logged in, redirect to dashboard
 if (isset($_SESSION['admin_id'])) {
     header('Location: admin/dashboard.php');
     exit;
@@ -70,11 +69,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <form action="login.php" method="POST">
                 <div class="form-group">
                     <label for="username">Usuario</label>
-                    <input type="text" id="username" name="username" placeholder="admin" required>
+                    <input type="text" id="username" name="username" placeholder="Usuario" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Contraseña</label>
-                    <input type="password" id="password" name="password" placeholder="••••••••" required>
+                    <input type="password" id="password" name="password" placeholder="********" required>
                 </div>
                 <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px;">
                     Iniciar Sesión

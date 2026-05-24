@@ -19,6 +19,7 @@ if ($pdo) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/img/Favicon4.png">
     <title>Productos - Admin Dulcería</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/admin.css">
@@ -34,6 +35,8 @@ if ($pdo) {
                     <li><a href="dashboard.php"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
                     <li><a href="products.php" class="active"><i class="fa-solid fa-candy-cane"></i> Productos</a></li>
                     <li><a href="add_product.php"><i class="fa-solid fa-plus"></i> Nuevo Producto</a></li>
+                    <li><a href="add_brand.php"><i class="fa-solid fa-copyright"></i> Marcas</a></li>
+                    <li><a href="add_category.php"><i class="fa-solid fa-tags"></i> Categorías</a></li>
                     <li><a href="../index.php" target="_blank"><i class="fa-solid fa-eye"></i> Ver Sitio</a></li>
                     <li><a href="../logout.php"><i class="fa-solid fa-right-from-bracket"></i> Salir</a></li>
                 </ul>

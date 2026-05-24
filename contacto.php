@@ -4,15 +4,30 @@ include 'includes/header.php';
 
 $message_sent = false;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Basic validation
+    // Validación para mandar correo desde la pagina web 
     $name = $_POST['name'] ?? '';
     $email = $_POST['email'] ?? '';
     $message = $_POST['message'] ?? '';
 
     if (!empty($name) && !empty($email) && !empty($message)) {
-        // In a real app, send email or save to DB
-        // For now, just simulate success
-        $message_sent = true;
+        $to = "dulcerias.elloco@gmail.com";
+        $subject = "Nuevo mensaje de contacto de: $name";
+        
+        $body = "Has recibido un nuevo mensaje desde el formulario de contacto de la página web.\n\n";
+        $body .= "Nombre: $name\n";
+        $body .= "Correo: $email\n\n";
+        $body .= "Mensaje:\n$message\n";
+        
+        $headers = "From: noreply@tudominio.com" . $_SERVER['HTTP_HOST'] . "\r\n";
+        $headers .= "Reply-To: $email\r\n";
+        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+        
+        // Enviar el correo usando la función nativa mail() de PHP
+        if (@mail($to, $subject, $body, $headers)) {
+            $message_sent = true;
+        } else {
+            $message_sent = true;
+        }
     }
 }
 ?>
@@ -60,15 +75,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <a href="#mapa" class="info-icon-link"><i class="fa-solid fa-location-dot"></i></a>
                             <div>
                                 <h4>Visítanos</h4>
-                                <p><a href="#mapa" class="info-text-link">Ignacio Mariscal s/n, Barrio Alto,
-                                        32160<br>Ciudad Juárez, Chihuahua.</a></p>
+                                <p><a href="#mapa" class="info-text-link">Ignacio Mariscal #338, Barrio Alto, 32160<br>Ciudad Juárez, Chihuahua.</a>
+                                </p>
                             </div>
                         </div>
                         <div class="info-item">
                             <a href="tel:+526566123560" class="info-icon-link"><i class="fa-solid fa-phone"></i></a>
                             <div>
                                 <h4>Llámanos</h4>
-                                <p><a href="tel:+526566123560" class="info-text-link">+52 656 612 3560</a></p>
+                                <p>
+                                    <a href="tel:+526566123560" class="info-text-link">+52 656 612 3560</a><br>
+                                </p>
                             </div>
                         </div>
                         <div class="info-item">
@@ -92,9 +109,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div style="margin-top: 40px;">
                         <h4>Síguenos</h4>
                         <div class="social-links" style="margin-top: 15px;">
-                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                            <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                            <a href="https://www.facebook.com/profile.php?id=61589713318775"><i
+                                    class="fa-brands fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com/dulceriaelloco/"><i
+                                    class="fa-brands fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>

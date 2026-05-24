@@ -58,12 +58,16 @@ include 'includes/header.php';
                     <h3>Botanas Picosas</h3>
                 </div>
                 <div class="product-card">
-                    <div class="product-img" style="height: 120px;"><i class="fa-solid fa-globe" style="font-size: 3rem; color: var(--primary);"></i></div>
-                    <h3>Importados</h3>
+                    <div class="product-img" style="height: 120px;"><i class="fa-solid fa-utensils" style="font-size: 3rem; color: var(--primary);"></i></div>
+                    <h3>Desechables</h3>
                 </div>
                 <div class="product-card">
-                    <div class="product-img" style="height: 120px;"><i class="fa-solid fa-ice-cream" style="font-size: 3rem; color: var(--primary);"></i></div>
-                    <h3>Postres</h3>
+                    <div class="product-img" style="height: 120px;"><i class="fa-solid fa-solid fa-face-grin-stars" style="font-size: 3rem; color: var(--primary);"></i></div>
+                    <h3>Articulos para Fiesta</h3>
+                </div>
+                <div class="product-card">
+                    <div class="product-img" style="height: 120px;"><i class="fa-solid fa-birthday-cake" style="font-size: 3rem; color: var(--primary);"></i></div>
+                    <h3>Repostería</h3>
                 </div>
             </div>
         </div>

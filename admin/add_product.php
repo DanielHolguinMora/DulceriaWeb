@@ -60,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/img/Favicon4.png">
     <title>Nuevo Producto - Admin Dulcería</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/admin.css">
@@ -74,8 +75,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <ul>
                     <li><a href="dashboard.php"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
                     <li><a href="products.php"><i class="fa-solid fa-candy-cane"></i> Productos</a></li>
-                    <li><a href="add_product.php" class="active"><i class="fa-solid fa-plus"></i> Nuevo Producto</a>
-                    </li>
+                    <li><a href="add_product.php" class="active"><i class="fa-solid fa-plus"></i> Nuevo Producto</a></li>
+                    <li><a href="add_brand.php"><i class="fa-solid fa-copyright"></i> Marcas</a></li>
+                    <li><a href="add_category.php"><i class="fa-solid fa-tags"></i> Categorías</a></li>
                     <li><a href="../index.php" target="_blank"><i class="fa-solid fa-eye"></i> Ver Sitio</a></li>
                     <li><a href="../logout.php"><i class="fa-solid fa-right-from-bracket"></i> Salir</a></li>
                 </ul>
@@ -112,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="marca_id">Marca (Opcional)</label>
+                            <label for="marca_id">Marca</label>
                             <select id="marca_id" name="marca_id"
                                 style="width:100%; padding:14px; border-radius:12px; border:2px solid #eee;">
                                 <option value="">Selecciona una marca</option>
@@ -141,6 +143,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </main>
     </div>
+    <!-- Admin Mobile Bottom Nav -->
+        <nav class="admin-mobile-nav">
+            <a href="dashboard.php" class="nav-item">
+                <i class="fa-solid fa-gauge"></i>
+                <span>Panel</span>
+            </a>
+            <a href="products.php" class="nav-item">
+                <i class="fa-solid fa-candy-cane"></i>
+                <span>Productos</span>
+            </a>
+            <div class="nav-item-center">
+                <a href="add_product.php" class="center-add">
+                    <i class="fa-solid fa-plus"></i>
+                </a>
+            </div>
+            <a href="../index.php" class="nav-item" target="_blank">
+                <i class="fa-solid fa-eye"></i>
+                <span>Ver Sitio</span>
+            </a>
+            <a href="../logout.php" class="nav-item">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Salir</span>
+            </a>
+        </nav>
 </body>
 
 </html>

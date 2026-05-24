@@ -2,11 +2,10 @@
 require_once 'includes/db.php';
 include 'includes/header.php';
 
-// Fetch products from database
 $featured_products = [];
 if ($pdo) {
     try {
-        // Fetch top 4 products with the most likes
+
         $stmt = $pdo->query("SELECT p.*, c.nombre as categoria_nombre FROM productos p JOIN categoria c ON p.categoria_id = c.id ORDER BY p.likes DESC LIMIT 4");
         $featured_products = $stmt->fetchAll();
     } catch (Exception $e) {
@@ -20,9 +19,9 @@ if ($pdo) {
     <section class="hero">
         <div class="container hero-grid">
             <div class="hero-content">
-                <h1>Sabor que <br><span class="text-accent">Endulza</span> el Alma</h1>
-                <p>Descubre la selección más exclusiva de dulces mexicanos e importados en el corazón de Ciudad Juárez.
-                    ¡Calidad premium para los paladares más exigentes!</p>
+                <h1>Visítanos en <br><span class="text-accent">Dulcería El Loco!</span></h1>
+                <p>Descubre la selección más amplia de dulces, desechables, artículos para fiesta y materias primas en el corazón de Ciudad Juárez. <br>
+                    ¡Los mejores productos a los mejores precios! </p>
                 <div class="hero-btns">
                     <a href="catalogo.php" class="btn btn-primary">Ver Catálogo</a>
                     <a href="#featured" class="btn btn-secondary">Nuestros Favoritos</a>
@@ -31,17 +30,17 @@ if ($pdo) {
             <div class="hero-collage">
                 <div class="collage-container">
                     <div class="collage-card card-main">
-                        <img src="assets/img/n3hero.jpg" alt="Deliciosos Dulces en Dulcería El Loco">
+                        <img src="assets/img/hero8.jpg" alt="Deliciosos Dulces en Dulcería El Loco">
                     </div>
                     <div class="collage-card card-overlay">
-                        <img src="assets/img/hero3.jpg" alt="Dulces Mexicanos e Importados">
+                        <img src="assets/img/7.jpg" alt="Dulces Mexicanos e Importados">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Brands Carousel Section -->
+    <!-- Carousel Section -->
     <section class="brands-marquee">
         <div class="container">
             <div class="section-header text-center" style="margin-bottom: 30px;">
@@ -52,9 +51,7 @@ if ($pdo) {
         <div class="marquee-wrapper">
             <div class="marquee-content">
                 <?php
-                // Get all brand logos from the assets folder
                 $brand_logos = glob('assets/img/Marcas el Loco/*.{png,jpg,jpeg,webp}', GLOB_BRACE);
-                // Render them twice to allow seamless infinite looping animation
                 for ($i = 0; $i < 2; $i++) {
                     foreach ($brand_logos as $logo) {
                         $brand_name = pathinfo($logo, PATHINFO_FILENAME);
@@ -76,8 +73,20 @@ if ($pdo) {
                 <h2>Favoritos de la Comunidad</h2>
                 <p>Los productos con más likes y más queridos por nuestros clientes reales en Ciudad Juárez.</p>
             </div>
+            
+            <!-- Skeleton Loader (visible durante la carga) -->
+            <div class="product-grid skeleton-grid" id="skeleton-grid">
+                <?php for($i=0; $i<4; $i++): ?>
+                <div class="skeleton-card">
+                    <div class="skeleton-img"></div>
+                    <div class="skeleton-line"></div>
+                    <div class="skeleton-line short"></div>
+                </div>
+                <?php endfor; ?>
+            </div>
 
-            <div class="product-grid">
+            <!-- Grid real (oculto hasta que cargue) -->
+            <div class="product-grid" id="featured-grid" style="display:none;">
                 <?php
                 require_once 'includes/product-card.php';
                 foreach ($featured_products as $product) {

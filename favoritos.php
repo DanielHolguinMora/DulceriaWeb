@@ -14,10 +14,8 @@ include 'includes/header.php';
     <section class="section-padding">
         <div class="container">
             <div class="product-grid" id="favorites-grid">
-                <!-- Injected by JS -->
             </div>
 
-            <!-- Empty State -->
             <div id="favorites-empty" class="empty-state" style="display: none;">
                 <div class="empty-icon">
                     <i class="fa-solid fa-heart-crack"></i>

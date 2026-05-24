@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dulcería El Loco - Los mejores dulces en Ciudad Juárez</title>
-    <meta name="description"
-        content="Descubre la mejor variedad de dulces mexicanos, importados y snacks en el centro de Ciudad Juárez. Calidad premium y sabor inigualable.">
+    <link rel="icon" type="image/png" href="assets/img/Favicon4.png">
+    <title>Dulcería El Loco | Dulces, Piñatas y Desechables</title>
+    <meta name="description" content="Encuentra dulces, piñatas, desechables y artículos para fiesta en Ciudad Juárez. Dulcería El Loco ofrece gran variedad y atención personalizada.">
+    <meta name="keywords" content="dulcería en ciudad juárez, dulces, piñatas, desechables, artículos para fiesta">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,6 +29,7 @@
             <div class="nav-logo">
                 <a href="index.php">
                     <img src="assets/img/LogoSolo.png" alt="Dulcería El Loco Logo" class="logo-img">
+                    <p class="logo-text">Dulcería <span class="logo-text-accent">El Loco!</span></p>
                 </a>
             </div>
 
@@ -44,12 +46,6 @@
                 <li><a href="contacto.php"
                         class="<?php echo $current_page == 'contacto.php' ? 'active' : ''; ?>">Contacto</a></li>
             </ul>
-
-            <div class="nav-actions">
-                <a href="login.php" class="btn btn-secondary btn-sm">
-                    <i class="fa-solid fa-user"></i> Admin
-                </a>
-            </div>
         </nav>
     </header>
 
@@ -61,13 +57,8 @@
         </a>
         <a href="catalogo.php" class="nav-item <?php echo $current_page == 'catalogo.php' ? 'active' : ''; ?>">
             <i class="fa-solid fa-candy-cane"></i>
-            <span>Dulces</span>
+            <span>Catálogo</span>
         </a>
-        <div class="nav-item-center">
-            <a href="index.php" class="center-logo">
-                <img src="assets/img/LogoSolo.png" alt="Logo">
-            </a>
-        </div>
         <a href="favoritos.php" class="nav-item <?php echo $current_page == 'favoritos.php' ? 'active' : ''; ?>">
             <i class="fa-solid fa-heart"></i>
             <span>Favoritos</span>
@@ -75,5 +66,9 @@
         <a href="contacto.php" class="nav-item <?php echo $current_page == 'contacto.php' ? 'active' : ''; ?>">
             <i class="fa-solid fa-envelope"></i>
             <span>Contacto</span>
+        </a>
+        <a href="https://wa.me/526561968945?text=<?php echo urlencode('Hola! Me gustaría obtener más información sobre sus productos.'); ?>" class="nav-item whatsapp-nav-item" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span>WhatsApp</span>
         </a>
     </nav>
