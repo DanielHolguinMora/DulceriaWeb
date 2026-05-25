@@ -1,15 +1,24 @@
+# Desactivar el listado de directorios
+Options -Indexes
+
+# Denegar el acceso a archivos de base de datos SQL
+<FilesMatch "\.sql$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
 ErrorDocument 404 /404.php
 
 RewriteEngine On
 
-# Para evitar el problema de "multiple submissions" de formularios
-# Esto asegura que si recargas una página después de un POST, no envíes el formulario de nuevo
-if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
-    header('Location: ' . strtok($_SERVER['REQUEST_URI'], '?'));
-    exit;
-}
 
-# Descomenta las siguientes líneas si tienes un certificado SSL y quieres forzar HTTPS
+
+# Descomentar las siguientes líneas (para cuando tenga) un certificado SSL y para forzar HTTPS
 # RewriteEngine On
 # RewriteCond %{HTTPS} off
 # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]

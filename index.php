@@ -15,7 +15,7 @@ if ($pdo) {
 ?>
 
 <main>
-    <!-- Hero Section -->
+    <!-- Sección Hero -->
     <section class="hero">
         <div class="container hero-grid">
             <div class="hero-content">
@@ -30,7 +30,7 @@ if ($pdo) {
             <div class="hero-collage">
                 <div class="collage-container">
                     <div class="collage-card card-main">
-                        <img src="assets/img/hero8.jpg" alt="Deliciosos Dulces en Dulcería El Loco">
+                        <img src="assets/img/hero5.jpg" alt="Deliciosos Dulces en Dulcería El Loco">
                     </div>
                     <div class="collage-card card-overlay">
                         <img src="assets/img/7.jpg" alt="Dulces Mexicanos e Importados">
@@ -40,7 +40,7 @@ if ($pdo) {
         </div>
     </section>
 
-    <!-- Carousel Section -->
+    <!-- Carrusel de Marcas -->
     <section class="brands-marquee">
         <div class="container">
             <div class="section-header text-center" style="margin-bottom: 30px;">
@@ -66,7 +66,7 @@ if ($pdo) {
         </div>
     </section>
 
-    <!-- Community Favorites Section -->
+    <!-- Favoritos de la Comunidad -->
     <section class="featured section-padding" id="featured">
         <div class="container">
             <div class="section-header text-center">
@@ -101,7 +101,7 @@ if ($pdo) {
         </div>
     </section>
 
-    <!-- Google Maps Reviews Section -->
+    <!-- Reseñas de Google Maps -->
     <section class="reviews-section section-padding">
         <div class="container">
             <div class="section-header text-center">
@@ -110,10 +110,10 @@ if ($pdo) {
             </div>
         </div>
 
-        <!-- Carousel Row 1 – moves LEFT -->
+        <!-- Carrusel 1 - izquierda -->
         <div class="reviews-carousel-wrapper">
             <div class="reviews-track reviews-track--left">
-                <!-- Card set (duplicated for seamless loop) -->
+                <!-- Set de tarjetas (duplicado para loop infinito) -->
                 <div class="review-card">
                     <div class="review-header">
                         <div class="review-avatar">AT</div>
@@ -136,45 +136,45 @@ if ($pdo) {
                         <i class="fa-brands fa-google review-badge"></i>
                     </div>
                     <p class="review-text">"Encuentras cosas muy ricas y mucho dulce típico. Me encanta la variedad que tienen."</p>
-                    <div class="review-date">Hace 1 mes</div>
+                    <div class="review-date">Hace 5 años</div>
                 </div>
                 <div class="review-card">
                     <div class="review-header">
-                        <div class="review-avatar">SL</div>
+                        <div class="review-avatar">RPS</div>
                         <div class="review-user-info">
-                            <h4>Sergio Lerma</h4>
+                            <h4>Ricardo Prieto Sandoval</h4>
                             <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                         </div>
                         <i class="fa-brands fa-google review-badge"></i>
                     </div>
-                    <p class="review-text">"Extenso surtido de dulces y piñatas. El mejor lugar para surtirte de todo para una fiesta."</p>
-                    <div class="review-date">Hace 3 meses</div>
+                    <p class="review-text">"Muy buena atencion y surtido."</p>
+                    <div class="review-date">Hace 6 años</div>
                 </div>
                 <div class="review-card">
                     <div class="review-header">
-                        <div class="review-avatar">RG</div>
+                        <div class="review-avatar">ESJ</div>
                         <div class="review-user-info">
-                            <h4>Rosario Guerrero</h4>
+                            <h4>Elizabeth San Juan</h4>
                             <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                         </div>
                         <i class="fa-brands fa-google review-badge"></i>
                     </div>
-                    <p class="review-text">"Siempre salgo feliz de aquí. Los mejores dulces mexicanos y mucha variedad de importación."</p>
-                    <div class="review-date">Hace 2 semanas</div>
+                    <p class="review-text">"Porque hay mucha variedad de dulces, frituras, todo para sus fiestas"</p>
+                    <div class="review-date">Hace 6 años</div>
                 </div>
                 <div class="review-card">
                     <div class="review-header">
-                        <div class="review-avatar">JM</div>
+                        <div class="review-avatar">JLP</div>
                         <div class="review-user-info">
-                            <h4>Juan Mendoza</h4>
+                            <h4>Jore Luis Prado</h4>
                             <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                         </div>
                         <i class="fa-brands fa-google review-badge"></i>
                     </div>
-                    <p class="review-text">"Atención al cliente de primera. Muy amables y siempre dispuestos a ayudarte a encontrar lo que buscas."</p>
-                    <div class="review-date">Hace 3 semanas</div>
+                    <p class="review-text">"Se encuentra de todo y a buen precio."</p>
+                    <div class="review-date">Hace 3 años</div>
                 </div>
-                <!-- Duplicate for seamless loop -->
+                <!-- Duplicado para loop infinito -->
                 <div class="review-card">
                     <div class="review-header">
                         <div class="review-avatar">AT</div>
@@ -197,158 +197,97 @@ if ($pdo) {
                         <i class="fa-brands fa-google review-badge"></i>
                     </div>
                     <p class="review-text">"Encuentras cosas muy ricas y mucho dulce típico. Me encanta la variedad que tienen."</p>
-                    <div class="review-date">Hace 1 mes</div>
+                    <div class="review-date">Hace 5 años</div>
                 </div>
                 <div class="review-card">
                     <div class="review-header">
-                        <div class="review-avatar">SL</div>
+                        <div class="review-avatar">RPS</div>
                         <div class="review-user-info">
-                            <h4>Sergio Lerma</h4>
+                            <h4>Ricardo Prieto Sandoval</h4>
                             <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                         </div>
                         <i class="fa-brands fa-google review-badge"></i>
                     </div>
-                    <p class="review-text">"Extenso surtido de dulces y piñatas. El mejor lugar para surtirte de todo para una fiesta."</p>
-                    <div class="review-date">Hace 3 meses</div>
+                    <p class="review-text">"Muy buena atencion y surtido."</p>
+                    <div class="review-date">Hace 6 años</div>
                 </div>
                 <div class="review-card">
                     <div class="review-header">
-                        <div class="review-avatar">RG</div>
+                        <div class="review-avatar">ESJ</div>
                         <div class="review-user-info">
-                            <h4>Rosario Guerrero</h4>
+                            <h4>Elizabeth San Juan</h4>
                             <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                         </div>
                         <i class="fa-brands fa-google review-badge"></i>
                     </div>
-                    <p class="review-text">"Siempre salgo feliz de aquí. Los mejores dulces mexicanos y mucha variedad de importación."</p>
-                    <div class="review-date">Hace 2 semanas</div>
+                    <p class="review-text">"Porque hay mucha variedad de dulces, frituras, todo para sus fiestas"</p>
+                    <div class="review-date">Hace 6 años</div>
                 </div>
                 <div class="review-card">
                     <div class="review-header">
-                        <div class="review-avatar">JM</div>
+                        <div class="review-avatar">JLP</div>
                         <div class="review-user-info">
-                            <h4>Juan Mendoza</h4>
+                            <h4>Jorge Luis Prado</h4>
                             <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                         </div>
                         <i class="fa-brands fa-google review-badge"></i>
                     </div>
-                    <p class="review-text">"Atención al cliente de primera. Muy amables y siempre dispuestos a ayudarte a encontrar lo que buscas."</p>
-                    <div class="review-date">Hace 3 semanas</div>
+                    <p class="review-text">"Se encuentra de todo y a buen precio."</p>
+                    <div class="review-date">Hace 3 años</div>
                 </div>
-            </div>
         </div>
 
-        <!-- Carousel Row 2 – moves RIGHT -->
+
+        <!-- Carrusel 2 – derecha -->
         <div class="reviews-carousel-wrapper">
             <div class="reviews-track reviews-track--right">
                 <div class="review-card">
                     <div class="review-header">
-                        <div class="review-avatar">LP</div>
+                        <div class="review-avatar">LM</div>
                         <div class="review-user-info">
-                            <h4>Laura Pacheco</h4>
+                            <h4>Lourdes Meza</h4>
                             <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                         </div>
                         <i class="fa-brands fa-google review-badge"></i>
                     </div>
-                    <p class="review-text">"¡Me encanta este lugar! Tiene de todo y los precios son muy accesibles. Definitivamente regreso."</p>
-                    <div class="review-date">Hace 1 semana</div>
+                    <p class="review-text">"¡Me encantó! Visiten ese lugar, está buenísimo."</p>
+                    <div class="review-date">Hace 6 años</div>
                 </div>
                 <div class="review-card">
                     <div class="review-header">
-                        <div class="review-avatar">CR</div>
+                        <div class="review-avatar">SC</div>
                         <div class="review-user-info">
-                            <h4>Carlos Reyes</h4>
+                            <h4>Sergio Campos</h4>
                             <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                         </div>
                         <i class="fa-brands fa-google review-badge"></i>
                     </div>
-                    <p class="review-text">"Lo mejor de Ciudad Juárez en dulces. Desde mazapán hasta los snacks más exóticos del mundo."</p>
-                    <div class="review-date">Hace 5 días</div>
+                    <p class="review-text">"Todo bien y buena atención."</p>
+                    <div class="review-date">Hace 4 años</div>
                 </div>
                 <div class="review-card">
                     <div class="review-header">
-                        <div class="review-avatar">MV</div>
+                        <div class="review-avatar">AC</div>
                         <div class="review-user-info">
-                            <h4>María Vásquez</h4>
+                            <h4>Artemio Cruz</h4>
                             <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                         </div>
                         <i class="fa-brands fa-google review-badge"></i>
                     </div>
-                    <p class="review-text">"Vine buscando dulces para la piñata de mi hijo y me encontré con una selección enorme. ¡Súper recomendado!"</p>
-                    <div class="review-date">Hace 4 días</div>
+                    <p class="review-text">"Ricos dulces. ¡Muy recomendado!"</p>
+                    <div class="review-date">Hace 5 años</div>
                 </div>
                 <div class="review-card">
                     <div class="review-header">
-                        <div class="review-avatar">EP</div>
+                        <div class="review-avatar">JM</div>
                         <div class="review-user-info">
-                            <h4>Eduardo Prieto</h4>
+                            <h4>Juan Morales</h4>
                             <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                         </div>
                         <i class="fa-brands fa-google review-badge"></i>
                     </div>
-                    <p class="review-text">"Llevo años comprando aquí. La calidad nunca falla y siempre sacan nuevos productos."</p>
-                    <div class="review-date">Hace 2 meses</div>
-                </div>
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="review-avatar">AF</div>
-                        <div class="review-user-info">
-                            <h4>Ana Flores</h4>
-                            <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        </div>
-                        <i class="fa-brands fa-google review-badge"></i>
-                    </div>
-                    <p class="review-text">"Los dulces típicos mexicanos son increíbles. Me recuerdan a mi infancia. Muy buen servicio."</p>
-                    <div class="review-date">Hace 1 mes</div>
-                </div>
-                <!-- Duplicate for seamless loop -->
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="review-avatar">LP</div>
-                        <div class="review-user-info">
-                            <h4>Laura Pacheco</h4>
-                            <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        </div>
-                        <i class="fa-brands fa-google review-badge"></i>
-                    </div>
-                    <p class="review-text">"¡Me encanta este lugar! Tiene de todo y los precios son muy accesibles. Definitivamente regreso."</p>
-                    <div class="review-date">Hace 1 semana</div>
-                </div>
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="review-avatar">CR</div>
-                        <div class="review-user-info">
-                            <h4>Carlos Reyes</h4>
-                            <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        </div>
-                        <i class="fa-brands fa-google review-badge"></i>
-                    </div>
-                    <p class="review-text">"Lo mejor de Ciudad Juárez en dulces. Desde mazapán hasta los snacks más exóticos del mundo."</p>
-                    <div class="review-date">Hace 5 días</div>
-                </div>
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="review-avatar">MV</div>
-                        <div class="review-user-info">
-                            <h4>María Vásquez</h4>
-                            <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        </div>
-                        <i class="fa-brands fa-google review-badge"></i>
-                    </div>
-                    <p class="review-text">"Vine buscando dulces para la piñata de mi hijo y me encontré con una selección enorme. ¡Súper recomendado!"</p>
-                    <div class="review-date">Hace 4 días</div>
-                </div>
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="review-avatar">EP</div>
-                        <div class="review-user-info">
-                            <h4>Eduardo Prieto</h4>
-                            <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        </div>
-                        <i class="fa-brands fa-google review-badge"></i>
-                    </div>
-                    <p class="review-text">"Llevo años comprando aquí. La calidad nunca falla y siempre sacan nuevos productos."</p>
-                    <div class="review-date">Hace 2 meses</div>
+                    <p class="review-text">"Buen lugar para comprar dulces."</p>
+                    <div class="review-date">Hace 6 años</div>
                 </div>
                 <div class="review-card">
                     <div class="review-header">
@@ -360,7 +299,68 @@ if ($pdo) {
                         <i class="fa-brands fa-google review-badge"></i>
                     </div>
                     <p class="review-text">"Los dulces típicos mexicanos son increíbles. Me recuerdan a mi infancia. Muy buen servicio."</p>
-                    <div class="review-date">Hace 1 mes</div>
+                    <div class="review-date">Hace 9 meses</div>
+                </div>
+                <!-- Duplicado para loop infinito -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">LM</div>
+                        <div class="review-user-info">
+                            <h4>Lourdes Meza</h4>
+                            <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        </div>
+                        <i class="fa-brands fa-google review-badge"></i>
+                    </div>
+                    <p class="review-text">"¡Me encantó! Visiten ese lugar, está buenísimo."</p>
+                    <div class="review-date">Hace 6 años</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">SC</div>
+                        <div class="review-user-info">
+                            <h4>Sergio Campos</h4>
+                            <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        </div>
+                        <i class="fa-brands fa-google review-badge"></i>
+                    </div>
+                    <p class="review-text">"Todo bien y buena atención."</p>
+                    <div class="review-date">Hace 4 años</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">AC</div>
+                        <div class="review-user-info">
+                            <h4>Artemio Cruz</h4>
+                            <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        </div>
+                        <i class="fa-brands fa-google review-badge"></i>
+                    </div>
+                    <p class="review-text">"Ricos dulces. ¡Muy recomendado!"</p>
+                    <div class="review-date">Hace 5 años</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">JM</div>
+                        <div class="review-user-info">
+                            <h4>Juan Morales</h4>
+                            <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        </div>
+                        <i class="fa-brands fa-google review-badge"></i>
+                    </div>
+                    <p class="review-text">"Buen lugar para comprar dulces."</p>
+                    <div class="review-date">Hace 6 años</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">AF</div>
+                        <div class="review-user-info">
+                            <h4>Ana Flores</h4>
+                            <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        </div>
+                        <i class="fa-brands fa-google review-badge"></i>
+                    </div>
+                    <p class="review-text">"Los dulces típicos mexicanos son increíbles. Me recuerdan a mi infancia. Muy buen servicio."</p>
+                    <div class="review-date">Hace 9 meses</div>
                 </div>
             </div>
         </div>
@@ -376,26 +376,25 @@ if ($pdo) {
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- Sobre Nosotros -->
     <section class="about section-padding">
         <div class="container about-grid">
             <div class="about-image">
-                <img src="https://images.unsplash.com/photo-1534073828943-f801091bb18c?auto=format&fit=crop&q=80&w=800"
-                    alt="Sobre nosotros">
+                <img src="assets/img/historia.jpg" alt="Sobre nosotros">
             </div>
             <div class="about-content">
                 <h2>Nuestra Historia de Sabor y Tradición</h2>
                 <p>Nacidos en el corazón de Ciudad Juárez, en <strong>Dulcería El Loco</strong> llevamos más de una década siendo los cómplices de tus momentos más dulces. Lo que comenzó como un sueño familiar se ha convertido en el punto de encuentro obligado para los amantes de las golosinas tradicionales y los snacks más exóticos del mundo.</p>
                 <p>Creemos que cada dulce evoca un recuerdo feliz. Por eso, seleccionamos con pasión y cuidado cada producto de nuestro catálogo para garantizar la máxima frescura y la variedad que mereces. Desde el clásico mazapán que se deshace en tu boca hasta las golosinas importadas más exclusivas y picositas.</p>
                 
-                <!-- Metrics badges -->
+                <!-- Medallas de Métricas -->
                 <div class="about-stats">
                     <div class="stat-item">
-                        <span class="stat-number">+10</span>
+                        <span class="stat-number">+30</span>
                         <span class="stat-label">Años de Sabor</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number">+500</span>
+                        <span class="stat-number">+3000</span>
                         <span class="stat-label">Productos</span>
                     </div>
                     <div class="stat-item">
@@ -411,7 +410,7 @@ if ($pdo) {
         </div>
     </section>
 
-    <!-- Social Media Section -->
+    <!-- Sección Redes Sociales -->
     <section class="social-section section-padding">
         <div class="container">
             <div class="section-header text-center">
@@ -420,7 +419,7 @@ if ($pdo) {
             </div>
 
             <div class="social-grid">
-                <!-- Facebook Card -->
+                <!-- Tarjeta Facebook -->
                 <div class="social-card facebook-card">
                     <div class="social-card-header">
                         <div class="social-icon-wrapper">
@@ -428,7 +427,7 @@ if ($pdo) {
                         </div>
                         <div class="social-profile-info">
                             <h3>Dulcería El Loco</h3>
-                            <span>@dulceria.elloco.juarez • 12k seguidores</span>
+                            <span>@dulceria.elloco.juárez •</span>
                         </div>
                     </div>
                     <div class="social-card-body">
@@ -440,7 +439,7 @@ if ($pdo) {
                                     <div class="fb-post-date">Ayer a las 14:30 • <i class="fa-solid fa-earth-americas"></i></div>
                                 </div>
                             </div>
-                            <p class="fb-post-content">¡Ya llegaron los dulces importados de esta semana! 🍭🎉 Ven por tus favoritos antes de que se agoten. Te esperamos en Ignacio Mariscal s/n, Barrio Alto. ¡Sabor garantizado! 👇</p>
+                            <p class="fb-post-content">¡Ya llegaron los dulces importados de esta semana! 🍭 Ven por tus favoritos antes de que se agoten. Te esperamos en Ignacio Mariscal #338, Barrio Alto. ¡Sabor garantizado! 👇</p>
                             <img class="fb-post-image" src="https://images.unsplash.com/photo-1581798459219-318e76aecc7b?auto=format&fit=crop&q=80&w=600" alt="Publicación de Facebook">
                             <div class="fb-post-stats">
                                 <span><i class="fa-solid fa-thumbs-up text-accent"></i> <i class="fa-solid fa-heart" style="color:#e84118;"></i> 245 personas</span>
@@ -455,7 +454,7 @@ if ($pdo) {
                     </div>
                 </div>
 
-                <!-- Instagram Card -->
+                <!-- Tarjeta Instagram -->
                 <div class="social-card instagram-card">
                     <div class="social-card-header">
                         <div class="social-icon-wrapper">
@@ -463,13 +462,13 @@ if ($pdo) {
                         </div>
                         <div class="social-profile-info">
                             <h3>@dulcerias.elloco</h3>
-                            <span>Dulcería El Loco Juárez • 8.4k seguidores</span>
+                            <span>Dulcería El Loco • </span>
                         </div>
                     </div>
                     <div class="social-card-body">
                         <div class="ig-grid-mockup">
                             <div class="ig-grid-item">
-                                <img src="https://images.unsplash.com/photo-1534073828943-f801091bb18c?auto=format&fit=crop&q=80&w=400" alt="Gomitas">
+                                <img src="assets/img/historia.jpg" alt="Gomitas">
                                 <div class="ig-overlay">
                                     <i class="fa-solid fa-heart"></i> 412
                                 </div>
@@ -481,19 +480,19 @@ if ($pdo) {
                                 </div>
                             </div>
                             <div class="ig-grid-item">
-                                <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&q=80&w=400" alt="Bebidas preparadas">
+                                <img src="assets/img/1.jpg" alt="Bebidas preparadas">
                                 <div class="ig-overlay">
                                     <i class="fa-solid fa-heart"></i> 589
                                 </div>
                             </div>
                             <div class="ig-grid-item">
-                                <img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?auto=format&fit=crop&q=80&w=400" alt="Paletas de chile">
+                                <img src="assets/img/2.jpg" alt="Paletas de chile">
                                 <div class="ig-overlay">
                                     <i class="fa-solid fa-heart"></i> 274
                                 </div>
                             </div>
                             <div class="ig-grid-item">
-                                <img src="https://images.unsplash.com/photo-1582231375626-20d7555e2b06?auto=format&fit=crop&q=80&w=400" alt="Dulces típicos">
+                                <img src="assets/img/3.jpg" alt="Dulces típicos">
                                 <div class="ig-overlay">
                                     <i class="fa-solid fa-heart"></i> 390
                                 </div>

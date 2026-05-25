@@ -5,8 +5,9 @@ include 'includes/header.php';
 $message_sent = false;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validación para mandar correo desde la pagina web 
-    $name = $_POST['name'] ?? '';
-    $email = $_POST['email'] ?? '';
+    // Sanitizar entradas eliminando saltos de línea para prevenir inyección de cabeceras
+    $name = str_replace(["\r", "\n"], '', $_POST['name'] ?? '');
+    $email = str_replace(["\r", "\n"], '', $_POST['email'] ?? '');
     $message = $_POST['message'] ?? '';
 
     if (!empty($name) && !empty($email) && !empty($message)) {
@@ -18,19 +19,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $body .= "Correo: $email\n\n";
         $body .= "Mensaje:\n$message\n";
         
-        $headers = "From: noreply@tudominio.com" . $_SERVER['HTTP_HOST'] . "\r\n";
-        $headers .= "Reply-To: $email\r\n";
+        // Obtener el host actual y limpiar caracteres extraños
+        $host = preg_replace('/[^a-zA-Z0-9.-]/', '', $_SERVER['HTTP_HOST'] ?? 'localhost');
+        if (empty($host) || $host === 'localhost') {
+            $host = 'dulceriaelloco.com';
+        }
+        
+        $headers = "From: Dulcería El Loco <no-reply@$host>\r\n";
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            die('Correo inválido');
+        }
         $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+        $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
         
         // Enviar el correo usando la función nativa mail() de PHP
-        if (@mail($to, $subject, $body, $headers)) {
+        if (mail($to, $subject, $body, $headers)) {
             $message_sent = true;
         } else {
-            $message_sent = true;
+            $message_sent = false;
         }
     }
 }
 ?>
+
 
 <main class="contact-page">
     <section class="catalog-hero">
@@ -122,10 +133,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="container">
                 <div class="map-container-wrapper">
                     <div class="map-header">
-                        <i class="fa-solid fa-map-location-dot"></i>
-                        <h3>Nuestra Ubicación</h3>
-                        <p>Encuéntranos en el corazón de Ciudad Juárez</p>
-                    </div>
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <h3>Nuestra Ubicación</h3>
+                    <p>Encuéntranos en el corazón de Ciudad Juárez</p>
+                </div>
                     <div class="map-frame">
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3393.210803072876!2d-106.49065928828318!3d31.737446536276135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86e75f2c5761719f%3A0x4a25bec6b902430a!2sDulcer%C3%ADa%20El%20Remolino!5e0!3m2!1ses-419!2smx!4v1778641478592!5m2!1ses-419!2smx"

@@ -20,21 +20,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user = $stmt->fetch();
 
             if ($user && password_verify($password, $user['password'])) {
+                session_regenerate_id(true);
                 $_SESSION['admin_id'] = $user['id'];
                 $_SESSION['admin_user'] = $user['username'];
                 header('Location: admin/dashboard.php');
                 exit;
             } else {
+                sleep(1); // Retraso anti fuerza bruta
                 $error = 'Credenciales inválidas';
             }
         } else {
-            // Mock login for demonstration if DB is not set up
-            if ($username === 'admin' && $password === 'admin123') {
-                $_SESSION['admin_id'] = 1;
-                $_SESSION['admin_user'] = 'admin';
-                header('Location: admin/dashboard.php');
-                exit;
-            }
             $error = 'Error de conexión a la base de datos';
         }
     } else {
@@ -49,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/img/Favicon4.png">
     <title>Admin Login - Dulcería El Loco</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/admin.css">

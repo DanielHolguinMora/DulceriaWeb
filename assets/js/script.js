@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const header = document.getElementById('header');
 
-    // --- Skeleton Loader (Favoritos de la Comunidad) ---
+    // --- Carga de Esqueletor (Favoritos de la Comunidad) ---
     window.addEventListener('load', () => {
         const skeletonGrid = document.getElementById('skeleton-grid');
         const featuredGrid = document.getElementById('featured-grid');
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Sticky Header on Scroll
+    // Header pegajoso al hacer scroll
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             header.classList.add('scrolled');
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // --- Toast System ---
+    // --- Sistema de Notificaciones ---
     const showToast = (message, icon = 'fa-check-circle') => {
         let container = document.querySelector('.toast-container');
         if (!container) {
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3000);
     };
 
-    // --- Favorites Logic (localStorage) ---
+    // --- Logica de Favoritos (localStorage) ---
     const getFavorites = () => JSON.parse(localStorage.getItem('dulceria_favorites')) || [];
 
     const saveFavorite = (product) => {
@@ -63,13 +63,13 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('dulceria_favorites', JSON.stringify(favs));
         showToast('Eliminado de favoritos', 'fa-trash-can');
 
-        // If we are on favorites page, re-render
+        // Si estamos en la pagina de favoritos, renderizamos
         if (window.location.pathname.includes('favoritos.php')) {
             renderFavorites();
         }
     };
 
-    // Initial check for heart icons
+    // Verificacion de iconos de corazones
     const updateHeartIcons = () => {
         const favs = getFavorites();
         document.querySelectorAll('.product-card').forEach(card => {
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Also check detailed button if present on product detail page
+        // Tambien verificar el boton detallado si esta presente en la pagina de detalles
         const detailedActions = document.querySelector('.product-actions-detailed');
         if (detailedActions) {
             const id = detailedActions.getAttribute('data-id');
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     updateHeartIcons();
 
-    // Favorite Button Toggle (handles both cards and detailed page)
+    // Boton de Favoritos con Toggle
     document.addEventListener('click', (e) => {
         const cardBtn = e.target.closest('.fav-btn');
         const detailedBtn = e.target.closest('.fav-btn-detailed');
@@ -128,12 +128,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     nombre: card.querySelector('h3').innerText,
                     descripcion: card.querySelector('p') ? card.querySelector('p').innerText : '',
                     imagen: card.getAttribute('data-image'),
-                    categoria: card.querySelector('.category-label').innerText
+                    categoria: card.querySelector('.category-label').innerText,
+                    marca: card.getAttribute('data-brand-name') || ''
                 };
                 saveFavorite(product);
             }
 
-            // Sync with DB
+            // Sincronizar con la base de datos
             toggleLikeDB(id, action);
         } else if (detailedBtn) {
             const container = detailedBtn.closest('.product-actions-detailed');
@@ -153,12 +154,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     nombre: container.getAttribute('data-name'),
                     descripcion: container.getAttribute('data-description'),
                     imagen: container.getAttribute('data-image'),
-                    categoria: container.getAttribute('data-category')
+                    categoria: container.getAttribute('data-category'),
+                    marca: container.getAttribute('data-brand') || ''
                 };
                 saveFavorite(product);
             }
 
-            // Sync with DB
+            // Sincronizar con la base de datos
             toggleLikeDB(id, action);
         }
     });
@@ -174,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
-                    // Update all cards with this product ID
+                    // Actualizar todas las tarjetas con este ID de producto
                     document.querySelectorAll(`.product-card[data-id="${id}"]`).forEach(card => {
                         const counter = card.querySelector('.likes-count');
                         if (counter) {
@@ -188,40 +190,142 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(err => console.error('Error syncing like:', err));
     };
 
-    // --- Favorites Page Rendering ---
+    // --- Pagina de Favoritos (Renderizado y Filtrado) ---
+    const filterFavorites = () => {
+        const catSelect = document.getElementById('fav-filter-category');
+        const brandSelect = document.getElementById('fav-filter-brand');
+        const container = document.getElementById('favorites-grid');
+        const filterEmptyState = document.getElementById('favorites-filter-empty');
+
+        if (!container || !catSelect || !brandSelect) return;
+
+        const catVal = catSelect.value.toLowerCase().trim().replace(/\s+/g, '-');
+        const brandVal = brandSelect.value.toLowerCase().trim().replace(/\s+/g, '-');
+
+        const cards = container.querySelectorAll('.product-card');
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+            const cardCat = (card.getAttribute('data-category') || '').toLowerCase().trim();
+            const cardBrand = (card.getAttribute('data-brand') || '').toLowerCase().trim();
+
+            const matchCat = catVal === 'all' || cardCat === catVal;
+            const matchBrand = brandVal === 'all' || cardBrand === brandVal;
+
+            if (matchCat && matchBrand) {
+                card.style.display = 'flex';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        if (filterEmptyState) {
+            if (visibleCount === 0 && cards.length > 0) {
+                filterEmptyState.style.display = 'block';
+                container.style.display = 'none';
+            } else {
+                filterEmptyState.style.display = 'none';
+                if (cards.length > 0) {
+                    container.style.display = 'grid';
+                }
+            }
+        }
+    };
+
     const renderFavorites = () => {
         const container = document.getElementById('favorites-grid');
         const emptyState = document.getElementById('favorites-empty');
+        const filterToolbar = document.getElementById('favorites-toolbar');
+        const filterEmptyState = document.getElementById('favorites-filter-empty');
+
         if (!container) return;
 
         const favs = getFavorites();
         if (favs.length === 0) {
             container.style.display = 'none';
+            if (filterToolbar) filterToolbar.style.display = 'none';
+            if (filterEmptyState) filterEmptyState.style.display = 'none';
             emptyState.style.display = 'block';
         } else {
             container.style.display = 'grid';
+            if (filterToolbar) filterToolbar.style.display = 'flex';
             emptyState.style.display = 'none';
-            container.innerHTML = favs.map(f => `
-                <div class="product-card" data-id="${f.id}" data-image="${f.imagen}">
-                    <div class="product-img">
-                        <img src="${f.imagen}" alt="${f.nombre}">
-                    </div>
-                    <div class="product-info">
-                        <span class="category-label">${f.categoria}</span>
-                        <h3>${f.nombre}</h3>
-                        <div class="product-footer">
-                            <div class="product-actions" style="width: 100%; display: flex; justify-content: flex-end;">
-                                <button class="fav-btn active" title="Quitar de favoritos"><i class="fa-solid fa-heart"></i></button>
+            if (filterEmptyState) filterEmptyState.style.display = 'none';
+
+            container.innerHTML = favs.map(f => {
+                const categoryClass = (f.categoria || '').toLowerCase().trim().replace(/\s+/g, '-');
+                const brandClass = (f.marca || '').toLowerCase().trim().replace(/\s+/g, '-');
+                const brandName = f.marca || '';
+
+                return `
+                    <div class="product-card" data-id="${f.id}" data-image="${f.imagen}" data-category="${categoryClass}" data-brand="${brandClass}">
+                        <div class="product-img">
+                            <img src="${f.imagen}" alt="${f.nombre}">
+                        </div>
+                        <div class="product-info">
+                            <span class="category-label">${f.categoria}</span>
+                            <h3>${f.nombre}</h3>
+                            ${brandName ? `<span class="brand-label"><i class="fa-solid fa-copyright"></i> ${brandName}</span>` : ''}
+                            <div class="product-footer">
+                                <div class="product-actions" style="width: 100%; display: flex; justify-content: flex-end;">
+                                    <button class="fav-btn active" title="Quitar de favoritos"><i class="fa-solid fa-heart"></i></button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
+
+            // Filtra inmediatamente por si los filtros ya estan seleccionados
+            filterFavorites();
         }
     };
-    renderFavorites();
 
-    // --- Catalog Filtering & Search Logic ---
+    // Inicializar Pagina de Favoritos
+    if (document.getElementById('favorites-grid')) {
+        renderFavorites();
+
+        // Event listeners de filtros
+        const catSelect = document.getElementById('fav-filter-category');
+        const brandSelect = document.getElementById('fav-filter-brand');
+
+        if (catSelect) {
+            catSelect.addEventListener('change', filterFavorites);
+        }
+        if (brandSelect) {
+            brandSelect.addEventListener('change', filterFavorites);
+        }
+    }
+
+    // Eliminar Todos los Favoritos
+    window.clearAllFavorites = () => {
+        if (confirm('¿Estás seguro de que deseas eliminar todos tus favoritos?')) {
+            const favs = getFavorites();
+
+            // Eliminar favoritos de la base de datos
+            favs.forEach(f => {
+                toggleLikeDB(f.id, 'unlike');
+            });
+
+            localStorage.removeItem('dulceria_favorites');
+            showToast('Todos los favoritos han sido eliminados', 'fa-trash-can');
+            renderFavorites();
+        }
+    };
+
+    // Reset Filtros de Favoritos
+    window.resetFavFilters = () => {
+        const catSelect = document.getElementById('fav-filter-category');
+        const brandSelect = document.getElementById('fav-filter-brand');
+
+        if (catSelect) catSelect.value = 'all';
+        if (brandSelect) brandSelect.value = 'all';
+
+        filterFavorites();
+    };
+
+    // --- Filtros y Busqueda en Catalogo ---
     const searchInput = document.getElementById('product-search');
     const filterButtons = document.querySelectorAll('.sidebar-filter-btn');
     const productCards = document.querySelectorAll('.product-card');
@@ -249,7 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Toggle empty state
+        // Mostrar estado vacio si no hay productos
         if (visibleCount === 0) {
             emptyState.style.display = 'block';
             catalogGrid.style.display = 'none';
@@ -260,12 +364,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // --- Actualizar contador de productos ---
         const countNumber = document.getElementById('product-count-number');
-        const countLabel  = document.getElementById('product-count-label');
+        const countLabel = document.getElementById('product-count-label');
 
         if (countNumber && countLabel) {
-            // Animación "pop" al cambiar el número
+            // Animacion "pop" al cambiar el numero
             countNumber.classList.remove('pop');
-            void countNumber.offsetWidth; // reflow para reiniciar animación
+            void countNumber.offsetWidth; // reflow para reiniciar animacion
             countNumber.classList.add('pop');
             countNumber.textContent = visibleCount;
 
@@ -295,7 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
             filterProducts();
         });
 
-        // Hide mobile keyboard when pressing "Enter"
+        // Ocultar teclado movil al presionar "Enter"
         searchInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 searchInput.blur();
@@ -305,13 +409,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     filterButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Update active state UI
+            // Actualizar estado activo de la UI
             filterButtons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
             activeCategory = btn.getAttribute('data-filter');
 
-            // Clear search bar when selecting 'Todo' (all)
+            // Limpiar barra de busqueda cuando se selecciona 'Todo'
             if (activeCategory === 'all') {
                 if (searchInput) {
                     searchInput.value = '';
@@ -323,7 +427,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Reset Filters function (global for the empty state button)
+    // Resetear filtros (global para el boton de estado vacio)
     window.resetFilters = () => {
         if (searchInput) searchInput.value = '';
         searchQuery = '';
@@ -337,17 +441,17 @@ document.addEventListener('DOMContentLoaded', () => {
         filterProducts();
     };
 
-    // (Carousel scroll removed — categories are now in a sidebar)
+    // (Eliminar scroll del carrusel - las categorias estan ahora en una barra lateral)
 
-    // --- Product Image Zoom & Lightbox ---
+    // --- Zoom de imagen de producto y Lightbox ---
     const mainImageContainer = document.querySelector('.main-image');
     const mainProductImg = document.getElementById('main-product-img');
 
     if (mainImageContainer && mainProductImg) {
-        // Amazon-like zoom effect on hover
+        // Efecto de zoom tipo Amazon al pasar el mouse
         mainImageContainer.addEventListener('mousemove', (e) => {
             const rect = mainImageContainer.getBoundingClientRect();
-            // Calculate mouse position relative to the container as a percentage
+            // Calcular la posicion del mouse en porcentaje relativa al contenedor
             const x = ((e.clientX - rect.left) / rect.width) * 100;
             const y = ((e.clientY - rect.top) / rect.height) * 100;
 
@@ -360,12 +464,12 @@ document.addEventListener('DOMContentLoaded', () => {
             mainProductImg.style.transformOrigin = 'center center';
         });
 
-        // Fullscreen Lightbox Modal on click
+        // Lightbox Fullscreen al hacer click
         mainImageContainer.addEventListener('click', () => {
             const imgSrc = mainProductImg.getAttribute('src');
             const imgAlt = mainProductImg.getAttribute('alt');
 
-            // Create Lightbox Container
+            // Crear contenedor del Lightbox
             const lightbox = document.createElement('div');
             lightbox.className = 'lightbox-modal';
             lightbox.innerHTML = `
@@ -377,12 +481,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             document.body.appendChild(lightbox);
 
-            // Force reflow and fade in
+            // Forzar reflow y fundido
             setTimeout(() => {
                 lightbox.classList.add('active');
             }, 10);
 
-            // Close lightbox on click
+            // Cerrar lightbox al hacer clic
             const closeLightbox = () => {
                 lightbox.classList.remove('active');
                 setTimeout(() => {
@@ -391,13 +495,13 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             lightbox.addEventListener('click', (e) => {
-                // Close if clicked outside the image itself or on the close button
+                // Cerrar si se hace clic fuera de la imagen o en el boton de cerrar
                 if (!e.target.closest('.lightbox-content img') || e.target.closest('.lightbox-close')) {
                     closeLightbox();
                 }
             });
 
-            // Close on escape key
+            // Cerrar con tecla escape
             const handleEsc = (e) => {
                 if (e.key === 'Escape') {
                     closeLightbox();
@@ -408,12 +512,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Product Card Click Navigation ---
+    // --- Navegacion al hacer clic en la tarjeta de producto ---
     document.addEventListener('click', (e) => {
         const card = e.target.closest('.product-card');
         if (!card) return;
 
-        // Ignore if the click is on the favorites button or inside it
+        // Ignorar si el clic es en el boton de favoritos o dentro de el
         if (e.target.closest('.fav-btn')) return;
 
         const id = card.getAttribute('data-id');
@@ -422,20 +526,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Floating WhatsApp Logic ---
+    // --- Logica del Flotante de WhatsApp ---
     const floatingWhatsApp = document.getElementById('floating-whatsapp');
     const mainFooter = document.querySelector('.main-footer');
 
     if (floatingWhatsApp) {
-        window.addEventListener('scroll', () => {
+        if (floatingWhatsApp.parentElement !== document.body) {
+            document.body.appendChild(floatingWhatsApp);
+        }
+
+        const updateWhatsAppVisibility = () => {
             let shouldShow = window.scrollY > 100;
 
-            // Hide when reaching the footer
+            // Ocultar cuando el footer es visible en pantalla
             if (mainFooter) {
                 const footerRect = mainFooter.getBoundingClientRect();
                 const windowHeight = window.innerHeight;
 
-                // If footer top is visible in the viewport
                 if (footerRect.top <= windowHeight) {
                     shouldShow = false;
                 }
@@ -446,10 +553,11 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 floatingWhatsApp.classList.remove('show');
             }
+        };
 
-            // Remove any dynamic bottom styles to allow CSS to manage position
-            floatingWhatsApp.style.bottom = '';
-        });
+        window.addEventListener('scroll', updateWhatsAppVisibility, { passive: true });
+        // Ejecutar al cargar por si la pagina ya tiene scroll
+        updateWhatsAppVisibility();
     }
 });
 

@@ -15,7 +15,7 @@ include 'includes/header.php';
         <div class="container">
             <div class="about-grid">
                 <div class="about-content">
-                    <h2>Dulcería El Loco</h2>
+                    <h2>Dulcería <span class="logo-text-accent">El Loco!</span></h2>
                     <p>Fundada en el corazón de Ciudad Juárez, nuestra dulcería nació con un propósito simple: traer alegría a través de los sabores más tradicionales y emocionantes.</p>
                     <p>Lo que comenzó como un pequeño puesto familiar se ha convertido en el destino favorito para quienes buscan desde el clásico mazapán hasta las botanas más exóticas e importadas.</p>
                     <p>Nos enorgullecemos de ser un negocio local que entiende el gusto de nuestra gente. Ya sea que busques algo picosito, dulce o salado, aquí siempre encontrarás un rincón de felicidad.</p>
@@ -47,27 +47,27 @@ include 'includes/header.php';
     <section class="section-padding featured">
         <div class="container text-center">
             <h2>Nuestra Especialidad</h2>
-            <p style="max-width: 700px; margin: 0 auto 50px;">Contamos con la selección más amplia de dulces mexicanos, papas preparadas y snacks que solo encontrarás aquí.</p>
-            <div class="product-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
-                <div class="product-card">
-                    <div class="product-img" style="height: 120px;"><i class="fa-solid fa-candy-cane" style="font-size: 3rem; color: var(--primary);"></i></div>
-                    <h3>Dulces Típicos</h3>
+            <p style="max-width: 700px; margin: 0 auto 50px;">Contamos con la selección más amplia de dulces mexicanos, articulos para fiesta y snacks que solo encontrarás aquí.</p>
+            <div class="about-stats" style="grid-template-columns: repeat(5, 1fr);">
+                <div class="stat-item">
+                    <span class="stat-number"><i class="fa-solid fa-candy-cane"></i></span>
+                    <span class="stat-label">Dulces Típicos</span>
                 </div>
-                <div class="product-card">
-                    <div class="product-img" style="height: 120px;"><i class="fa-solid fa-pepper-hot" style="font-size: 3rem; color: var(--primary);"></i></div>
-                    <h3>Botanas Picosas</h3>
+                <div class="stat-item">
+                    <span class="stat-number"><i class="fa-solid fa-pepper-hot"></i></span>
+                    <span class="stat-label">Botanas Picosas</span>
                 </div>
-                <div class="product-card">
-                    <div class="product-img" style="height: 120px;"><i class="fa-solid fa-utensils" style="font-size: 3rem; color: var(--primary);"></i></div>
-                    <h3>Desechables</h3>
+                <div class="stat-item">
+                    <span class="stat-number"><i class="fa-solid fa-utensils"></i></span>
+                    <span class="stat-label">Desechables</span>
                 </div>
-                <div class="product-card">
-                    <div class="product-img" style="height: 120px;"><i class="fa-solid fa-solid fa-face-grin-stars" style="font-size: 3rem; color: var(--primary);"></i></div>
-                    <h3>Articulos para Fiesta</h3>
+                <div class="stat-item">
+                    <span class="stat-number"><i class="fa-solid fa-face-grin-stars"></i></span>
+                    <span class="stat-label">Artículos para Fiesta</span>
                 </div>
-                <div class="product-card">
-                    <div class="product-img" style="height: 120px;"><i class="fa-solid fa-birthday-cake" style="font-size: 3rem; color: var(--primary);"></i></div>
-                    <h3>Repostería</h3>
+                <div class="stat-item">
+                    <span class="stat-number"><i class="fa-solid fa-birthday-cake"></i></span>
+                    <span class="stat-label">Repostería</span>
                 </div>
             </div>
         </div>

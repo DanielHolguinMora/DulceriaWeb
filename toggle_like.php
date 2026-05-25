@@ -2,30 +2,31 @@
 header('Content-Type: application/json');
 require_once 'includes/db.php';
 
+// Verificando la conexión a la base de datos
 if (!$pdo) {
     echo json_encode(['status' => 'error', 'message' => 'No hay conexión a la base de datos.']);
     exit;
 }
-
+// Verificando que el método sea POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(['status' => 'error', 'message' => 'Método no permitido. Use POST.']);
     exit;
 }
-
+// Obteniendo los datos de la solicitud
 $data = json_decode(file_get_contents('php://input'), true);
 $product_id = isset($data['id']) ? intval($data['id']) : (isset($_POST['id']) ? intval($_POST['id']) : null);
 $action = isset($data['action']) ? $data['action'] : (isset($_POST['action']) ? $_POST['action'] : '');
-
+// Validando que el ID del producto sea correcto
 if (!$product_id) {
     echo json_encode(['status' => 'error', 'message' => 'ID de producto no proporcionado.']);
     exit;
 }
-
+// Validando que la acción sea correcta
 if ($action !== 'like' && $action !== 'unlike') {
     echo json_encode(['status' => 'error', 'message' => 'Acción no válida. Debe ser "like" o "unlike".']);
     exit;
 }
-
+// Actualizando el contador de likes
 try {
     $stmt = $pdo->prepare("SELECT likes FROM productos WHERE id = ?");
     $stmt->execute([$product_id]);

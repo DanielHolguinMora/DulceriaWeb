@@ -37,7 +37,7 @@
     <div class="footer-bottom container">
         <div class="footer-copy">
             <p>&copy; <?php echo date('Y'); ?> Dulcería El Loco! Todos los derechos reservados.</p>            
-            <p>Diseñado y programado por <i class="fa-solid fa-heart text-accent"></i> <a href="https://portafoliol.netlify.app" target="_blank">Lic. Daniel Holguin</a></p>
+            <p>Diseñado & programado con <i class="fa-solid fa-heart text-accent"></i> en <a href="https://portafoliol.netlify.app" style="text-decoration: underline;">Ciudad Juárez</a></p>
         </div>
         <div class="footer-admin-link">
             <a href="login.php" class="admin-access-btn"><i class="fa-solid fa-user-lock"></i> Acceso Admin</a>
@@ -45,7 +45,7 @@
     </div>
 </footer>
 
-<!-- Floating WhatsApp Button -->
+<!-- Boton de WhatsApp -->
 <a href="https://wa.me/526561968945?text=<?php echo urlencode('Hola! Me gustaría obtener más información sobre sus productos.'); ?>" 
    class="floating-whatsapp" id="floating-whatsapp" target="_blank" aria-label="Contáctanos por WhatsApp">
     <i class="fa-brands fa-whatsapp"></i>

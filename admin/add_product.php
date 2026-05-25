@@ -5,7 +5,7 @@ require_once '../includes/db.php';
 $error = '';
 $success = '';
 
-// Fetch categories and brands for the select inputs
+// Obtiene las categorías y marcas para los campos de selección
 $categories = [];
 $brands = [];
 if ($pdo) {
@@ -14,12 +14,18 @@ if ($pdo) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Validar CSRF
+    $token = $_POST['csrf_token'] ?? '';
+    if (empty($token) || $token !== ($_SESSION['csrf_token'] ?? '')) {
+        die('Acción no autorizada: Token CSRF no válido o faltante.');
+    }
+
     $nombre = $_POST['nombre'] ?? '';
     $descripcion = $_POST['descripcion'] ?? '';
     $categoria_id = $_POST['categoria_id'] ?? '';
     $marca_id = $_POST['marca_id'] ?? null;
 
-    // Handle Image Upload
+    // Maneja la subida de la imagen
     $image_path = '';
     if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === 0) {
         $upload_dir = '../uploads/';
@@ -27,13 +33,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $file_ext = strtolower(pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION));
         
         if (in_array($file_ext, $allowed_exts)) {
-            $file_name = uniqid() . '.' . $file_ext;
-            $target_file = $upload_dir . $file_name;
+            // Verificar si el archivo es realmente una imagen
+            $check = getimagesize($_FILES['imagen']['tmp_name']);
+            if ($check !== false) {
+                $file_name = uniqid() . '.' . $file_ext;
+                $target_file = $upload_dir . $file_name;
 
-            if (move_uploaded_file($_FILES['imagen']['tmp_name'], $target_file)) {
-                $image_path = 'uploads/' . $file_name;
+                if (move_uploaded_file($_FILES['imagen']['tmp_name'], $target_file)) {
+                    $image_path = 'uploads/' . $file_name;
+                } else {
+                    $error = 'Error al subir la imagen al servidor.';
+                }
             } else {
-                $error = 'Error al subir la imagen al servidor.';
+                $error = 'El archivo subido no es una imagen válida.';
             }
         } else {
             $error = 'Formato de imagen no permitido. Usa JPG, PNG o WEBP.';
@@ -97,6 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="success-message"><?php echo $success; ?></div><?php endif; ?>
 
                 <form action="add_product.php" method="POST" enctype="multipart/form-data" class="admin-form">
+                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                     <div class="form-group">
                         <label for="nombre">Nombre del Producto</label>
                         <input type="text" id="nombre" name="nombre" placeholder="Ej. Mazapán Gigante" required>

@@ -49,7 +49,7 @@ if ($pdo) {
                 <a href="add_product.php" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Nuevo Producto</a>
             </header>
 
-            <!-- Admin Tools -->
+            <!-- Herramientas de administración -->
             <section class="admin-tools">
                 <div class="search-box">
                     <i class="fa-solid fa-magnifying-glass"></i>
@@ -109,7 +109,7 @@ if ($pdo) {
                                             <div class="action-btns">
                                                 <a href="edit_product.php?id=<?php echo $p['id']; ?>" class="btn-edit"
                                                     title="Editar"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                <a href="delete_product.php?id=<?php echo $p['id']; ?>" class="btn-delete"
+                                                <a href="delete_product.php?id=<?php echo $p['id']; ?>&csrf_token=<?php echo $_SESSION['csrf_token']; ?>" class="btn-delete"
                                                     title="Eliminar"
                                                     onclick="return confirm('¿Estás seguro de que quieres eliminar este producto?')"><i
                                                         class="fa-solid fa-trash"></i></a>
@@ -149,7 +149,7 @@ if ($pdo) {
                                         <a href="edit_product.php?id=<?php echo $p['id']; ?>" class="btn-edit-mobile">
                                             <i class="fa-solid fa-pen"></i> Editar
                                         </a>
-                                        <a href="delete_product.php?id=<?php echo $p['id']; ?>" class="btn-delete-mobile"
+                                        <a href="delete_product.php?id=<?php echo $p['id']; ?>&csrf_token=<?php echo $_SESSION['csrf_token']; ?>" class="btn-delete-mobile"
                                            onclick="return confirm('¿Eliminar producto?')">
                                             <i class="fa-solid fa-trash"></i> Eliminar
                                         </a>
@@ -216,7 +216,7 @@ if ($pdo) {
 
             searchInput.addEventListener('input', filterProducts);
             
-            // Hide mobile keyboard when pressing "Enter"
+            // Oculta el teclado móvil al presionar "Enter"
             searchInput.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter') {
                     searchInput.blur();

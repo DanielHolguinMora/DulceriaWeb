@@ -1,4 +1,4 @@
-/* Admin Interface Styles */
+/* Estilos de la interfaz de administración */
 
 :root {
     --admin-bg: #f4f7f6;
@@ -65,7 +65,7 @@
     color: var(--admin-primary);
 }
 
-/* Dashboard Layout */
+/* Diseño del dashboard */
 .admin-container {
     display: flex;
     min-height: 100vh;
@@ -187,7 +187,7 @@
     line-height: 1;
 }
 
-/* Gradients para las tarjetas */
+/* Gradientes para las tarjetas */
 .bg-gradient-primary {
     border-left-color: var(--admin-primary);
 }
@@ -227,7 +227,7 @@
     background: #3498db;
 }
 
-/* Outline buttons para las acciones rápidas */
+/* Botones para acciones rápidas */
 .btn-outline-success {
     border: 2px solid #2ecc71;
     color: #2ecc71;
@@ -250,7 +250,7 @@
     color: white;
 }
 
-/* Admin Tables */
+/* Tablas de administración */
 .admin-card {
     background: white;
     border-radius: 12px;
@@ -330,7 +330,7 @@
     box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
 }
 
-/* Forms */
+/* Formularios */
 .admin-form {
     max-width: 800px;
 }
@@ -341,7 +341,7 @@
     gap: 20px;
 }
 
-/* Admin Tools */
+/* Herramientas de administración */
 .admin-tools {
     display: flex;
     gap: 20px;
@@ -392,10 +392,9 @@
 
 .admin-products-mobile {
     display: none;
-    /* Hidden on desktop */
 }
 
-/* Admin Mobile Bottom Nav - Hidden on desktop */
+/* Barra de navegación inferior móvil de administración - Oculta en escritorio */
 .admin-mobile-nav {
     display: none;
 }
@@ -418,12 +417,10 @@
 
     .table-responsive {
         display: none;
-        /* Hide table on mobile */
     }
 
     .admin-products-mobile {
         display: flex;
-        /* Show cards only on mobile */
         flex-direction: column;
         gap: 20px;
     }
@@ -511,7 +508,6 @@
 
     .table-responsive {
         display: none;
-        /* Hide table on mobile */
     }
 
     .admin-products-mobile {
@@ -605,7 +601,6 @@
         grid-template-columns: 1fr;
     }
 
-    /* Admin Mobile Bottom Nav - Mejorado (sin parches de color) */
     .admin-mobile-nav {
         display: none;
         position: fixed;
@@ -614,7 +609,6 @@
         width: 100%;
         height: 70px;
         background: #2c3e50;
-        /* Mismo fondo oscuro */
         z-index: 2000;
         justify-content: space-around;
         align-items: center;
@@ -666,7 +660,6 @@
         box-shadow: 0 8px 20px rgba(248, 169, 31, 0.6);
     }
 
-    /* ===== ESTILO ACTIVO (icono flotante, sin parches) ===== */
     .admin-mobile-nav .nav-item.active {
         color: var(--admin-primary);
     }
@@ -732,4 +725,5 @@
             padding-bottom: 80px;
         }
     }
+
 }

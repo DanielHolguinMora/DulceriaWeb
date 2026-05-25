@@ -8,12 +8,12 @@ $categories_db = [];
 
 if ($pdo) {
     try {
-        // Fetch categories for filters
+        // Obtener categorías para filtros
         $stmt_cat = $pdo->query("SELECT * FROM categoria");
         $categories_db = $stmt_cat->fetchAll();
 
-        // Fetch products with category names
-        $stmt = $pdo->query("SELECT p.*, c.nombre as categoria_nombre FROM productos p JOIN categoria c ON p.categoria_id = c.id");
+        // Obtener productos con categoría y marca
+        $stmt = $pdo->query("SELECT p.*, c.nombre as categoria_nombre, m.nombre as marca_nombre FROM productos p JOIN categoria c ON p.categoria_id = c.id LEFT JOIN marca m ON p.marca_id = m.id");
         $products = $stmt->fetchAll();
     } catch (Exception $e) {
         $error = "Error al conectar con la base de datos.";
@@ -22,7 +22,7 @@ if ($pdo) {
 ?>
 
 <main class="catalog-page">
-    <!-- Catalog Header -->
+    <!-- Header del catálogo -->
     <section class="catalog-hero">
         <div class="container text-center">
             <h1>Catálogo de Dulces</h1>
@@ -86,7 +86,7 @@ if ($pdo) {
                             ?>
                         </div>
 
-                        <!-- Empty State -->
+                        <!-- En caso de no encontrar productos -->
                         <div id="empty-state" class="empty-state" style="display: none;">
                             <div class="empty-icon">
                                 <i class="fa-solid fa-cookie-bite"></i>

@@ -8,6 +8,10 @@ $edit_item = null;
 
 // Manejar eliminación (DELETE)
 if (isset($_GET['delete'])) {
+    $token = $_GET['csrf_token'] ?? '';
+    if (empty($token) || $token !== ($_SESSION['csrf_token'] ?? '')) {
+        die('Acción no autorizada: Token CSRF no válido o faltante.');
+    }
     $delete_id = intval($_GET['delete']);
     try {
         // Verificar primero si hay productos asociados a esta marca
@@ -29,6 +33,10 @@ if (isset($_GET['delete'])) {
 
 // Manejar creación (INSERT) y actualización (UPDATE)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $token = $_POST['csrf_token'] ?? '';
+    if (empty($token) || $token !== ($_SESSION['csrf_token'] ?? '')) {
+        die('Acción no autorizada: Token CSRF no válido o faltante.');
+    }
     $nombre = trim($_POST['nombre'] ?? '');
     $id = isset($_POST['id']) ? intval($_POST['id']) : null;
 
@@ -241,6 +249,7 @@ try {
                     <?php endif; ?>
 
                     <form action="add_brand.php" method="POST" class="admin-form">
+                        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                         <?php if ($edit_item): ?>
                             <input type="hidden" name="id" value="<?php echo $edit_item['id']; ?>">
                         <?php endif; ?>
@@ -288,7 +297,7 @@ try {
                                             <td>
                                                 <div class="action-btns" style="justify-content: flex-end;">
                                                     <a href="add_brand.php?edit=<?php echo $marca['id']; ?>" class="btn-edit" title="Editar"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                    <a href="add_brand.php?delete=<?php echo $marca['id']; ?>" class="btn-delete" title="Eliminar" onclick="return confirm('¿Estás seguro de que deseas eliminar esta marca?')"><i class="fa-solid fa-trash"></i></a>
+                                                    <a href="add_brand.php?delete=<?php echo $marca['id']; ?>&csrf_token=<?php echo $_SESSION['csrf_token']; ?>" class="btn-delete" title="Eliminar" onclick="return confirm('¿Estás seguro de que deseas eliminar esta marca?')"><i class="fa-solid fa-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>

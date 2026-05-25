@@ -8,3 +8,4 @@ node_modules/
 
 # Database config (if it had passwords, but it's local root)
 # includes/db.php
+
