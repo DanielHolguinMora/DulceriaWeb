@@ -480,6 +480,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
 
             document.body.appendChild(lightbox);
+            document.body.classList.add('lightbox-open');
 
             // Forzar reflow y fundido
             setTimeout(() => {
@@ -489,6 +490,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Cerrar lightbox al hacer clic
             const closeLightbox = () => {
                 lightbox.classList.remove('active');
+                document.body.classList.remove('lightbox-open');
                 setTimeout(() => {
                     lightbox.remove();
                 }, 300);

@@ -3,6 +3,9 @@ require_once 'includes/db.php';
 include 'includes/header.php';
 
 $message_sent = false;
+$message_error = false;
+$error_details = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validación para mandar correo desde la pagina web 
     // Sanitizar entradas eliminando saltos de línea para prevenir inyección de cabeceras
@@ -11,33 +14,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $message = $_POST['message'] ?? '';
 
     if (!empty($name) && !empty($email) && !empty($message)) {
-        $to = "dulcerias.elloco@gmail.com";
-        $subject = "Nuevo mensaje de contacto de: $name";
-        
-        $body = "Has recibido un nuevo mensaje desde el formulario de contacto de la página web.\n\n";
-        $body .= "Nombre: $name\n";
-        $body .= "Correo: $email\n\n";
-        $body .= "Mensaje:\n$message\n";
-        
-        // Obtener el host actual y limpiar caracteres extraños
-        $host = preg_replace('/[^a-zA-Z0-9.-]/', '', $_SERVER['HTTP_HOST'] ?? 'localhost');
-        if (empty($host) || $host === 'localhost') {
-            $host = 'dulceriaelloco.com';
-        }
-        
-        $headers = "From: Dulcería El Loco <no-reply@$host>\r\n";
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            die('Correo inválido');
-        }
-        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-        $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
-        
-        // Enviar el correo usando la función nativa mail() de PHP
-        if (mail($to, $subject, $body, $headers)) {
-            $message_sent = true;
+            $message_error = true;
+            $error_details = 'El correo electrónico ingresado no es válido.';
         } else {
-            $message_sent = false;
+            $to = "dulcerias.elloco@gmail.com";
+            $subject = "Nuevo mensaje de contacto de: $name";
+            
+            $body = "Has recibido un nuevo mensaje desde el formulario de contacto de la página web.\n\n";
+            $body .= "Nombre: $name\n";
+            $body .= "Correo: $email\n\n";
+            $body .= "Mensaje:\n$message\n";
+            
+            // Obtener el host actual y limpiar caracteres extraños
+            $host = preg_replace('/[^a-zA-Z0-9.-]/', '', $_SERVER['HTTP_HOST'] ?? 'localhost');
+            if (empty($host) || $host === 'localhost') {
+                $host = 'dulceriaelloco.com';
+            }
+            
+            $headers = "From: Dulcería El Loco <no-reply@$host>\r\n";
+            $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+            $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+            
+            // Enviar el correo usando la función nativa mail() de PHP con @ para evitar warnings molestos en local (XAMPP sin sendmail configurado)
+            if (@mail($to, $subject, $body, $headers)) {
+                $message_sent = true;
+            } else {
+                $message_error = true;
+                $error_details = 'No se pudo enviar el mensaje en este momento. Por favor, inténtelo de nuevo más tarde o contáctenos directamente.';
+            }
         }
+    } else {
+        $message_error = true;
+        $error_details = 'Por favor, complete todos los campos del formulario.';
     }
 }
 ?>
@@ -59,6 +68,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="success-message">
                             <i class="fa-solid fa-circle-check"></i> ¡Mensaje enviado con éxito! Nos pondremos en contacto
                             pronto.
+                        </div>
+                    <?php elseif ($message_error): ?>
+                        <div class="error-message">
+                            <i class="fa-solid fa-circle-xmark"></i> <?php echo htmlspecialchars($error_details); ?>
                         </div>
                     <?php endif; ?>
 
